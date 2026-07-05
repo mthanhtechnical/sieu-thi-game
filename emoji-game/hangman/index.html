@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2a2414" />
+    <meta name="description" content="Hangman — đoán chữ tiếng Anh theo gợi ý trước khi hết lượt sai." />
+    <title>Hangman</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../doan-thanh-ngu/styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../guide.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header><a class="brand" href="../"><span>✍️</span><strong>Hangman</strong></a><div class="header-actions"><button class="icon-button" id="shareGameButton" aria-label="Chia sẻ game">↗</button><div class="best-score">Kỷ lục <strong id="bestScore">0</strong></div></div></header>
+      <main>
+        <section class="screen welcome active" id="welcomeScreen"><div class="hero-icons"><span>A</span><span>✍️</span><span>Z</span></div><p class="eyebrow">Đoán chữ · Từ vựng · 6 lượt sai</p><h1>Đoán từ trước khi hết lượt.</h1><p class="intro">Đọc gợi ý, chọn từng chữ cái. Sai quá 6 lần là mất lượt.</p><button class="primary-button" id="startButton">Bắt đầu đoán <span>→</span></button><button class="secondary-button" id="welcomeShareButton">Chia sẻ game <span>↗</span></button></section>
+        <section class="screen game" id="gameScreen"><div class="game-head"><span id="roundText">Từ 1/8</span><span>Điểm <strong id="scoreText">0</strong></span></div><div class="progress"><i id="progressBar"></i></div><article class="question-card"><p class="eyebrow" id="categoryText">Hint</p><div class="hangman-face" id="face">🙂</div><h2 id="maskedWord">_ _ _ _</h2><p id="hintText"></p><small id="wrongText">Sai: 0/6</small></article><div class="keyboard" id="keyboard"></div></section>
+        <section class="screen feedback" id="feedbackScreen"><div class="feedback-icon" id="feedbackIcon">✨</div><p class="eyebrow" id="feedbackLabel">Đúng rồi</p><h2 id="feedbackTitle">WORD</h2><p id="feedbackText"></p><button class="primary-button" id="nextButton">Tiếp tục <span>→</span></button></section>
+        <section class="screen result" id="resultScreen"><div class="result-icon">🏆</div><p class="eyebrow">Hoàn thành Hangman</p><h2 id="resultTitle">Đoán chữ rất ổn!</h2><div class="score-panel"><span>Tổng điểm</span><strong id="finalScore">0</strong><small id="finalCorrect">0/8 từ đúng</small></div><button class="primary-button" id="shareResultButton">Thách bạn bè <span>↗</span></button><button class="secondary-button" id="replayButton">Chơi lại</button></section>
+      </main>
+      <footer><a href="../">← Về cổng game</a><span>Đoán từ tiếng Anh</span></footer>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="../word-bank-1000.js"></script>
+    <script src="app.js"></script>
+    <script src="../guide.js"></script>
+      <script src="../game-hub-integration.js"></script>
+  </body>
+</html>

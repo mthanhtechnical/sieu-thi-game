@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4338ca" />
+    <title>Logic Puzzle - Detective Grid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=20260629-complete" />
+    <link rel="stylesheet" href="../guide.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="../"><span>🧠</span><strong>Logic Puzzle</strong></a>
+        <div class="header-actions">
+          <button class="icon-button" type="button" id="shareGameButton" aria-label="Chia sẻ game">↗</button>
+          <div class="best-score">Case <strong>3</strong></div>
+        </div>
+      </header>
+
+      <main>
+        <section class="screen welcome active" id="welcomeScreen">
+          <div class="hero-icons"><span>?</span><span>🧠</span><span>✓</span></div>
+          <p class="eyebrow">Detective grid · Loại trừ</p>
+          <h1>Đọc manh mối để phá vụ án.</h1>
+          <p class="intro">Đánh dấu đúng, sai và dùng suy luận loại trừ để tìm ra mọi cặp liên hệ trong bảng.</p>
+          <button class="primary-button start-button" type="button" id="startButton">Bắt đầu Logic Puzzle <span>→</span></button>
+          <button class="secondary-button" type="button" id="welcomeShareButton">Chia sẻ game ↗</button>
+        </section>
+
+        <section class="screen game-screen" id="gameScreen">
+          <div class="game-layout">
+            <section class="control-rail">
+              <div>
+                <p class="eyebrow">Cách chơi</p>
+                <h2>Đọc manh mối và loại trừ.</h2>
+                <p>
+                  Bấm ô để đổi trạng thái: trống, sai, đúng. Khi chọn đúng một cặp, hàng và cột liên quan sẽ tự loại trừ.
+                </p>
+              </div>
+
+              <div class="level-list" id="levelList"></div>
+
+              <div class="metrics">
+                <div><strong id="solvedMetric">0/0</strong><span>Kết luận</span></div>
+                <div><strong id="checkMetric">0</strong><span>Lần kiểm tra</span></div>
+              </div>
+            </section>
+
+            <section class="play-stage">
+              <div class="stage-head">
+                <div>
+                  <p class="eyebrow" id="caseTopic">Vụ việc nhỏ</p>
+                  <h2 id="caseTitle">Ai đi với thứ gì?</h2>
+                </div>
+                <div class="action-row">
+                  <button class="ghost-button" type="button" id="hintButton">Gợi ý</button>
+                  <button class="ghost-button" type="button" id="resetButton">Làm lại</button>
+                  <button class="primary-button" type="button" id="checkButton">Kiểm tra</button>
+                </div>
+              </div>
+
+              <div class="detective-layout">
+                <aside class="clue-sheet">
+                  <h3>Manh mối</h3>
+                  <ol id="clueList"></ol>
+                </aside>
+
+                <div class="matrix-frame">
+                  <div class="matrix" id="matrix"></div>
+                </div>
+              </div>
+
+              <div class="answers" id="answers"></div>
+              <div class="message" id="message" role="status">Bấm vào một ô để bắt đầu suy luận.</div>
+            </section>
+          </div>
+        </section>
+      </main>
+
+      <div class="complete-modal" id="completeModal" role="dialog" aria-modal="true" aria-labelledby="completeTitle">
+        <div class="complete-panel">
+          <div class="complete-burst" aria-hidden="true">
+            <span>✓</span>
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p class="eyebrow">Hoàn thành</p>
+          <h2 id="completeTitle">Vụ việc đã sáng tỏ!</h2>
+          <p id="completeText">Bạn đã suy luận đúng toàn bộ cặp liên hệ.</p>
+          <div class="complete-actions">
+            <button class="primary-button" type="button" id="nextCaseButton">Chơi case tiếp <span>→</span></button>
+            <button class="secondary-button" type="button" id="closeCompleteButton">Đóng</button>
+          </div>
+        </div>
+      </div>
+
+      <footer><a href="../">← Về cổng game</a><span>Logic Puzzle</span></footer>
+    </div>
+
+    <script src="app.js?v=20260629-complete"></script>
+    <script src="../guide.js"></script>
+      <script src="../game-hub-integration.js"></script>
+  </body>
+</html>

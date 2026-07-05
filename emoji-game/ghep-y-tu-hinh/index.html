@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#101922" />
+    <meta
+      name="description"
+      content="Ghép Ý Từ Hình — nhìn bộ hình gợi ý, chọn từ khóa đúng và vượt chuỗi câu hỏi trí nhớ."
+    />
+    <title>Ghép Ý Từ Hình</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../guide.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <a class="brand" href="../">
+          <span>🧩</span>
+          <strong>Ghép Ý Từ Hình</strong>
+        </a>
+        <div class="header-actions">
+          <button class="icon-button" id="shareGameButton" aria-label="Chia sẻ game">↗</button>
+          <div class="best-score">Kỷ lục <strong id="bestScore">0</strong></div>
+        </div>
+      </header>
+
+      <main>
+        <section class="screen welcome active" id="welcomeScreen">
+          <div class="image-stack" aria-hidden="true">
+            <span>🌧️</span><span>☕</span><span>📖</span><span>🪟</span>
+          </div>
+          <p class="eyebrow">Nhìn hình · Chọn ý · Nhớ chi tiết</p>
+          <h1>Ghép hình thành từ khóa.</h1>
+          <p class="intro">
+            Mỗi màn có một bộ hình gợi ý. Chọn đúng từ khóa để mở câu hỏi trí nhớ và giữ chuỗi điểm.
+          </p>
+          <div class="rule-grid">
+            <div><strong>8</strong><span>chủ đề</span></div>
+            <div><strong>2</strong><span>bước mỗi màn</span></div>
+            <div><strong>+30</strong><span>điểm combo</span></div>
+          </div>
+          <button class="primary-button" id="startButton">Bắt đầu chơi <span>→</span></button>
+          <button class="secondary-button" id="welcomeShareButton">Chia sẻ game <span>↗</span></button>
+        </section>
+
+        <section class="screen game" id="gameScreen">
+          <div class="game-head">
+            <span id="roundText">Màn 1/8</span>
+            <span>Điểm <strong id="scoreText">0</strong></span>
+          </div>
+          <div class="progress"><i id="progressBar"></i></div>
+
+          <div class="prompt-card">
+            <p class="eyebrow" id="stepLabel">Bước 1 · Đoán từ khóa</p>
+            <h2 id="promptTitle">Bộ hình này đang gợi ý điều gì?</h2>
+            <p id="promptHint">Nhìn tổng thể, đừng dịch từng hình quá cứng.</p>
+          </div>
+
+          <div class="picture-grid" id="pictureGrid"></div>
+          <div class="answer-grid" id="answerGrid"></div>
+        </section>
+
+        <section class="screen feedback" id="feedbackScreen">
+          <div class="feedback-icon" id="feedbackIcon">✨</div>
+          <p class="eyebrow" id="feedbackLabel">Chính xác</p>
+          <h2 id="feedbackTitle">Bạn bắt ý nhanh đấy!</h2>
+          <p id="feedbackText">Câu trí nhớ đã mở.</p>
+          <button class="primary-button" id="nextButton">Tiếp tục <span>→</span></button>
+        </section>
+
+        <section class="screen result" id="resultScreen">
+          <div class="result-icon">🏆</div>
+          <p class="eyebrow">Hoàn thành chuỗi hình</p>
+          <h2 id="resultTitle">Trí nhớ sắc bén!</h2>
+          <div class="score-panel">
+            <span>Tổng điểm</span>
+            <strong id="finalScore">0</strong>
+            <small id="finalCorrect">0/16 lượt đúng</small>
+          </div>
+          <button class="primary-button" id="shareResultButton">Thách bạn bè <span>↗</span></button>
+          <button class="secondary-button" id="replayButton">Chơi lại bộ khác</button>
+        </section>
+      </main>
+
+      <footer>
+        <a href="../">← Về cổng game</a>
+        <span>Game trí nhớ bằng hình ảnh</span>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="app.js"></script>
+    <script src="../guide.js"></script>
+      <script src="../game-hub-integration.js"></script>
+  </body>
+</html>

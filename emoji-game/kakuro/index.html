@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0f766e" />
+    <title>Kakuro - Sum Grid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=20260629-complete" />
+    <link rel="stylesheet" href="../guide.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="../"><span>🔢</span><strong>Kakuro</strong></a>
+        <div class="header-actions">
+          <button class="icon-button" type="button" id="shareGameButton" aria-label="Chia sẻ game">↗</button>
+          <div class="best-score">Màn <strong>3</strong></div>
+        </div>
+      </header>
+
+      <main>
+        <section class="screen welcome active" id="welcomeScreen">
+          <div class="hero-icons"><span>3</span><span>🔢</span><span>9</span></div>
+          <p class="eyebrow">Sum grid · Không lặp số</p>
+          <h1>Điền số để khớp mọi tổng.</h1>
+          <p class="intro">Chọn ô trắng, nhập số 1-9 sao cho mỗi dãy bằng tổng gợi ý và không có số lặp.</p>
+          <button class="primary-button start-button" type="button" id="startButton">Bắt đầu Kakuro <span>→</span></button>
+          <button class="secondary-button" type="button" id="welcomeShareButton">Chia sẻ game ↗</button>
+        </section>
+
+        <section class="screen game-screen" id="gameScreen">
+          <div class="game-layout">
+            <section class="control-rail">
+              <div>
+                <p class="eyebrow">Luật chơi</p>
+                <h2 id="puzzleName">Điền tổng đúng</h2>
+                <p>
+                  Mỗi ô gợi ý có tổng cho dãy bên phải hoặc bên dưới. Mỗi dãy dùng số 1-9 và không lặp số.
+                </p>
+              </div>
+
+              <div class="level-list" id="levelList"></div>
+
+              <div class="metrics">
+                <div><strong id="filledMetric">0/0</strong><span>Ô đã nhập</span></div>
+                <div><strong id="groupMetric">0</strong><span>Cụm đúng</span></div>
+                <div><strong id="checkMetric">0</strong><span>Lần kiểm tra</span></div>
+              </div>
+            </section>
+
+            <section class="play-stage">
+              <div class="stage-head">
+                <div>
+                  <p class="eyebrow" id="difficultyLabel">Dễ</p>
+                  <h2 id="stageTitle">Bảng tổng nhỏ</h2>
+                </div>
+                <div class="action-row">
+                  <button class="ghost-button" type="button" id="hintButton">Gợi ý</button>
+                  <button class="ghost-button" type="button" id="clearButton">Xóa ô</button>
+                  <button class="ghost-button" type="button" id="resetButton">Làm lại</button>
+                  <button class="primary-button" type="button" id="checkButton">Kiểm tra</button>
+                </div>
+              </div>
+
+              <div class="board-frame">
+                <div class="kakuro-board" id="board"></div>
+              </div>
+
+              <div class="number-pad" id="numberPad" aria-label="Bàn phím số"></div>
+              <div class="message" id="message" role="status">Chọn một ô trắng rồi nhập số.</div>
+            </section>
+          </div>
+        </section>
+      </main>
+
+      <div class="complete-modal" id="completeModal" role="dialog" aria-modal="true" aria-labelledby="completeTitle">
+        <div class="complete-panel">
+          <div class="complete-burst" aria-hidden="true">
+            <span>✓</span>
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p class="eyebrow">Hoàn thành</p>
+          <h2 id="completeTitle">Bảng tổng đã khớp!</h2>
+          <p id="completeText">Bạn đã điền đúng toàn bộ cụm tổng.</p>
+          <div class="complete-actions">
+            <button class="primary-button" type="button" id="nextPuzzleButton">Chơi màn tiếp <span>→</span></button>
+            <button class="secondary-button" type="button" id="closeCompleteButton">Đóng</button>
+          </div>
+        </div>
+      </div>
+
+      <footer><a href="../">← Về cổng game</a><span>Kakuro</span></footer>
+    </div>
+
+    <script src="app.js?v=20260629-complete"></script>
+    <script src="../guide.js"></script>
+      <script src="../game-hub-integration.js"></script>
+  </body>
+</html>

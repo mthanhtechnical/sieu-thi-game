@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#14243a" />
+    <meta name="description" content="Đoán Hình Bắt Chữ — nhìn hình gợi ý, ghép âm và nghĩa để đoán cụm từ đúng." />
+    <title>Đoán Hình Bắt Chữ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../doan-thanh-ngu/styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../guide.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <a class="brand" href="../"><span>🖼️</span><strong>Đoán Hình Bắt Chữ</strong></a>
+        <div class="header-actions"><button class="icon-button" id="shareGameButton" aria-label="Chia sẻ game">↗</button><div class="best-score">Kỷ lục <strong id="bestScore">0</strong></div></div>
+      </header>
+      <main>
+        <section class="screen welcome active" id="welcomeScreen">
+          <div class="hero-icons"><span>🐝</span><span>🍯</span><span>🧠</span></div>
+          <p class="eyebrow">Nhìn hình · Ghép âm · Bắt chữ</p>
+          <h1>Hình đơn giản, đáp án không đơn giản.</h1>
+          <p class="intro">Mỗi câu là một cụm hình gợi âm hoặc nghĩa. Chọn đáp án đúng trong 4 lựa chọn.</p>
+          <button class="primary-button" id="startButton">Chơi ngay <span>→</span></button>
+          <button class="secondary-button" id="welcomeShareButton">Chia sẻ game <span>↗</span></button>
+        </section>
+        <section class="screen game" id="gameScreen">
+          <div class="game-head"><span id="roundText">Câu 1/10</span><span>Điểm <strong id="scoreText">0</strong></span></div>
+          <div class="progress"><i id="progressBar"></i></div>
+          <article class="question-card">
+            <p class="eyebrow" id="categoryText">Bắt chữ</p>
+            <div class="picture-clue" id="pictureClue">🐝 🍯</div>
+            <h2 id="questionText">Cụm hình này gợi đáp án nào?</h2>
+            <p id="hintText"></p>
+          </article>
+          <div class="answer-grid" id="answerGrid"></div>
+        </section>
+        <section class="screen feedback" id="feedbackScreen"><div class="feedback-icon" id="feedbackIcon">✨</div><p class="eyebrow" id="feedbackLabel">Chính xác</p><h2 id="feedbackTitle">Hay đấy!</h2><p id="feedbackText"></p><button class="primary-button" id="nextButton">Tiếp tục <span>→</span></button></section>
+        <section class="screen result" id="resultScreen"><div class="result-icon">🏆</div><p class="eyebrow">Hoàn thành</p><h2 id="resultTitle">Bắt chữ rất bén!</h2><div class="score-panel"><span>Tổng điểm</span><strong id="finalScore">0</strong><small id="finalCorrect">0/10 câu đúng</small></div><button class="primary-button" id="shareResultButton">Thách bạn bè <span>↗</span></button><button class="secondary-button" id="replayButton">Chơi lại bộ khác</button></section>
+      </main>
+      <footer><a href="../">← Về cổng game</a><span>Game hình ảnh suy luận</span></footer>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="app.js"></script>
+    <script src="../guide.js"></script>
+      <script src="../game-hub-integration.js"></script>
+  </body>
+</html>

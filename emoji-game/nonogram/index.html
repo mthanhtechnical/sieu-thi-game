@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111827" />
+    <title>Nonogram - Pixel Logic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=20260629-complete" />
+    <link rel="stylesheet" href="../guide.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="../"><span>⬜</span><strong>Nonogram</strong></a>
+        <div class="header-actions">
+          <button class="icon-button" type="button" id="shareGameButton" aria-label="Chia sẻ game">↗</button>
+          <div class="best-score">Màn <strong>3</strong></div>
+        </div>
+      </header>
+
+      <main>
+        <section class="screen welcome active" id="welcomeScreen">
+          <div class="hero-icons"><span>1</span><span>⬜</span><span>X</span></div>
+          <p class="eyebrow">Pixel logic · Gợi ý hàng cột</p>
+          <h1>Tô ô để mở hình bí mật.</h1>
+          <p class="intro">Đọc các con số ở đầu hàng và cột, tô đúng cụm ô rồi dùng dấu X để loại trừ ô trống.</p>
+          <button class="primary-button start-button" type="button" id="startButton">Bắt đầu Nonogram <span>→</span></button>
+          <button class="secondary-button" type="button" id="welcomeShareButton">Chia sẻ game ↗</button>
+        </section>
+
+        <section class="screen game-screen" id="gameScreen">
+          <div class="game-layout">
+            <section class="control-rail" aria-label="Điều khiển Nonogram">
+              <div>
+                <p class="eyebrow">Mục tiêu</p>
+                <h2 id="puzzleTitle">Mở hình bí mật</h2>
+                <p id="puzzleIntro">
+                  Đọc gợi ý hàng và cột, tô đúng các cụm ô để hiện hình.
+                </p>
+              </div>
+
+              <div class="level-list" id="levelList"></div>
+
+              <div class="tool-box">
+                <span>Công cụ</span>
+                <div class="tool-grid">
+                  <button class="tool-button active" type="button" data-tool="paint">Tô</button>
+                  <button class="tool-button" type="button" data-tool="cross">Đánh X</button>
+                  <button class="tool-button" type="button" data-tool="erase">Xóa</button>
+                </div>
+              </div>
+
+              <div class="metrics">
+                <div><strong id="fillMetric">0</strong><span>Ô đã tô</span></div>
+                <div><strong id="markMetric">0</strong><span>Dấu X</span></div>
+                <div><strong id="errorMetric">0</strong><span>Lượt sai</span></div>
+              </div>
+            </section>
+
+            <section class="play-stage">
+              <div class="stage-head">
+                <div>
+                  <p class="eyebrow" id="difficultyLabel">Dễ</p>
+                  <h2 id="stageTitle">Trái tim nhỏ</h2>
+                </div>
+                <div class="action-row">
+                  <button class="ghost-button" type="button" id="hintButton">Gợi ý</button>
+                  <button class="ghost-button" type="button" id="resetButton">Làm lại</button>
+                  <button class="primary-button" type="button" id="checkButton">Kiểm tra</button>
+                </div>
+              </div>
+
+              <div class="board-frame">
+                <div class="nonogram-board" id="board"></div>
+              </div>
+
+              <div class="message" id="message" role="status">
+                Chọn công cụ Tô rồi bắt đầu với các hàng có gợi ý lớn nhất.
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+
+      <div class="complete-modal" id="completeModal" role="dialog" aria-modal="true" aria-labelledby="completeTitle">
+        <div class="complete-panel">
+          <div class="complete-burst" aria-hidden="true">
+            <span>✓</span>
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <p class="eyebrow">Hoàn thành</p>
+          <h2 id="completeTitle">Hình bí mật đã mở!</h2>
+          <p id="completeText">Bạn đã tô đúng toàn bộ hàng và cột.</p>
+          <div class="complete-actions">
+            <button class="primary-button" type="button" id="nextPuzzleButton">Chơi màn tiếp <span>→</span></button>
+            <button class="secondary-button" type="button" id="closeCompleteButton">Đóng</button>
+          </div>
+        </div>
+      </div>
+
+      <footer><a href="../">← Về cổng game</a><span>Nonogram</span></footer>
+    </div>
+
+    <script src="app.js?v=20260629-complete"></script>
+    <script src="../guide.js"></script>
+      <script src="../game-hub-integration.js"></script>
+  </body>
+</html>

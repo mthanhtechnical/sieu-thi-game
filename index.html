@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Công cụ lập kế hoạch tăng trưởng Facebook cá nhân bằng nội dung thật."
+    />
+    <title>Folio — Tăng trưởng Facebook thật</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise"></div>
+    <header class="topbar">
+      <a class="brand" href="#dashboard" aria-label="Folio">
+        <span class="brand-mark">F</span>
+        <span>folio</span>
+      </a>
+      <nav>
+        <a href="#dashboard">Tổng quan</a>
+        <a href="#generator">Tạo nội dung</a>
+        <a href="#plan">Kế hoạch</a>
+        <a href="#tracking">Theo dõi</a>
+      </nav>
+      <button class="ghost-button" id="resetButton">Đặt lại dữ liệu</button>
+    </header>
+
+    <main>
+      <section class="hero" id="dashboard">
+        <div class="hero-copy">
+          <span class="eyebrow">Tăng follower bằng giá trị thật</span>
+          <h1>Biến trang cá nhân thành nơi người ta muốn quay lại.</h1>
+          <p>
+            Xây chủ đề rõ ràng, đăng đều và đo thứ thật sự hiệu quả — không bot,
+            không spam, không đánh đổi tài khoản.
+          </p>
+          <a class="primary-button" href="#setup">Bắt đầu kế hoạch <span>→</span></a>
+        </div>
+        <div class="hero-card">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="profile-preview">
+            <div class="avatar">BẠN</div>
+            <div>
+              <strong id="previewName">Thương hiệu của bạn</strong>
+              <span id="previewNiche">Chủ đề đang chờ bạn chọn</span>
+            </div>
+          </div>
+          <div class="metric">
+            <span>Mục tiêu 30 ngày</span>
+            <strong id="heroGoal">+300</strong>
+            <small>người theo dõi chất lượng</small>
+          </div>
+          <div class="mini-chart" aria-label="Biểu đồ tăng trưởng minh họa">
+            <i style="height: 20%"></i><i style="height: 34%"></i>
+            <i style="height: 30%"></i><i style="height: 48%"></i>
+            <i style="height: 63%"></i><i style="height: 58%"></i>
+            <i style="height: 84%"></i><i style="height: 100%"></i>
+          </div>
+        </div>
+      </section>
+
+      <section class="section setup-grid" id="setup">
+        <div class="section-heading">
+          <span class="step-number">01</span>
+          <div>
+            <span class="eyebrow">Đặt nền móng</span>
+            <h2>Bạn muốn được nhớ đến vì điều gì?</h2>
+          </div>
+        </div>
+        <form class="panel form-grid" id="profileForm">
+          <label>
+            Tên hiển thị
+            <input id="displayName" name="displayName" placeholder="Ví dụ: Minh làm nội thất" />
+          </label>
+          <label>
+            Chủ đề chính
+            <input id="niche" name="niche" placeholder="Ví dụ: Nội thất tối giản" />
+          </label>
+          <label>
+            Người bạn muốn tiếp cận
+            <input id="audience" name="audience" placeholder="Ví dụ: Người mới mua căn hộ" />
+          </label>
+          <label>
+            Follower hiện tại
+            <input id="currentFollowers" name="currentFollowers" type="number" min="0" placeholder="1200" />
+          </label>
+          <label>
+            Mục tiêu tăng trong 30 ngày
+            <input id="goal" name="goal" type="number" min="1" placeholder="300" />
+          </label>
+          <button class="primary-button form-submit" type="submit">
+            Lưu định hướng <span>✓</span>
+          </button>
+        </form>
+      </section>
+
+      <section class="section" id="generator">
+        <div class="section-heading">
+          <span class="step-number">02</span>
+          <div>
+            <span class="eyebrow">Bớt nghĩ, bắt đầu viết</span>
+            <h2>Tạo khung bài đăng trong 30 giây.</h2>
+          </div>
+        </div>
+        <div class="generator-grid">
+          <form class="panel generator-form" id="contentForm">
+            <label>
+              Hôm nay bạn muốn nói về gì?
+              <textarea id="topic" rows="4" placeholder="Ví dụ: Sau 30 tuổi, tôi mới hiểu vì sao càng nhiều bạn càng mệt"></textarea>
+            </label>
+            <div class="two-columns">
+              <label>
+                Kiểu bài
+                <select id="contentType">
+                  <option value="story">Kể chuyện cá nhân</option>
+                  <option value="guide">Chia sẻ kiến thức</option>
+                  <option value="opinion">Góc nhìn / quan điểm</option>
+                  <option value="case">Câu chuyện khách hàng</option>
+                  <option value="question">Bài hỏi tương tác</option>
+                </select>
+              </label>
+              <label>
+                Giọng điệu
+                <select id="tone">
+                  <option value="friendly">Gần gũi</option>
+                  <option value="expert">Chuyên gia</option>
+                  <option value="bold">Thẳng thắn</option>
+                  <option value="warm">Chân thành</option>
+                </select>
+              </label>
+            </div>
+            <button class="primary-button full-width" type="submit">
+              Tạo bản nháp <span>✦</span>
+            </button>
+          </form>
+          <article class="panel output-card">
+            <div class="output-head">
+              <span>Bản nháp của bạn</span>
+              <button class="copy-button" id="copyButton" type="button">Sao chép</button>
+            </div>
+            <div class="caption-output empty" id="captionOutput">
+              <span class="spark">✦</span>
+              <p>Điền chủ đề bên trái để tạo cấu trúc bài đăng.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="plan">
+        <div class="section-heading">
+          <span class="step-number">03</span>
+          <div>
+            <span class="eyebrow">Thử nghiệm 30 ngày</span>
+            <h2>Ba nhóm nội dung. Một nhóm thắng cuộc.</h2>
+          </div>
+        </div>
+        <div class="experiment-head">
+          <div class="category-legend">
+            <span class="legend work">Công việc · 10 video</span>
+            <span class="legend money">Tiền bạc · 10 video</span>
+            <span class="legend relation">Quan hệ · 10 video</span>
+          </div>
+          <div class="completion"><strong id="completionCount">0/30</strong> đã đăng</div>
+        </div>
+        <div class="winner-panel panel" id="winnerPanel">
+          <div>
+            <span class="eyebrow">Kết quả tạm thời</span>
+            <strong id="winnerTitle">Chưa đủ dữ liệu để chọn nhóm thắng</strong>
+            <p id="winnerReason">Đăng ít nhất 2 video ở mỗi nhóm và nhập kết quả để bắt đầu so sánh.</p>
+          </div>
+          <div class="scoreboard" id="scoreboard"></div>
+        </div>
+        <div class="month-grid" id="monthGrid"></div>
+      </section>
+
+      <section class="section" id="tracking">
+        <div class="section-heading">
+          <span class="step-number">04</span>
+          <div>
+            <span class="eyebrow">Đo để tiến bộ</span>
+            <h2>Ghi lại tăng trưởng, nhìn ra tín hiệu.</h2>
+          </div>
+        </div>
+        <div class="tracking-grid">
+          <form class="panel tracking-form" id="trackingForm">
+            <label>
+              Ngày
+              <input type="date" id="trackingDate" required />
+            </label>
+            <label>
+              Tổng follower
+              <input type="number" id="trackingFollowers" min="0" required placeholder="1250" />
+            </label>
+            <label>
+              Bài tốt nhất / ghi chú
+              <input id="trackingNote" placeholder="Ví dụ: Bài kể chuyện nghề" />
+            </label>
+            <button class="primary-button" type="submit">Thêm mốc</button>
+          </form>
+          <div class="panel summary-panel">
+            <div class="summary-stat">
+              <span>Follower gần nhất</span>
+              <strong id="latestFollowers">—</strong>
+            </div>
+            <div class="summary-stat accent-stat">
+              <span>Thay đổi đã ghi nhận</span>
+              <strong id="followerChange">—</strong>
+            </div>
+            <div class="progress-wrap">
+              <div class="progress-label">
+                <span>Tiến độ mục tiêu</span><strong id="progressText">0%</strong>
+              </div>
+              <div class="progress-track"><i id="progressBar"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="history" id="history"></div>
+      </section>
+
+      <section class="ethics-note">
+        <span>✓</span>
+        <p>
+          Tool này không đăng nhập Facebook, không thao tác tài khoản và không tạo
+          follower ảo. Dữ liệu được lưu cục bộ trong trình duyệt của bạn.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>Folio / Xây hiện diện đáng tin cậy.</span>
+      <span>Làm chậm mà chắc vẫn hơn nhanh rồi bay tài khoản.</span>
+    </footer>
+
+    <div class="toast" id="toast" role="status"></div>
+    <dialog class="metric-dialog" id="metricDialog">
+      <form method="dialog" id="metricForm">
+        <div class="dialog-head">
+          <div>
+            <span class="eyebrow" id="dialogCategory">Kết quả video</span>
+            <h3 id="dialogTitle">Ngày 1</h3>
+          </div>
+          <button class="dialog-close" value="cancel" aria-label="Đóng">×</button>
+        </div>
+        <input type="hidden" id="metricVideoId" />
+        <div class="dialog-grid">
+          <label>
+            Lượt xem
+            <input type="number" id="metricViews" min="0" placeholder="1000" />
+          </label>
+          <label>
+            Lượt chia sẻ
+            <input type="number" id="metricShares" min="0" placeholder="25" />
+          </label>
+          <label>
+            Thời gian xem trung bình (giây)
+            <input type="number" id="metricWatch" min="0" step="0.1" placeholder="18.5" />
+          </label>
+          <label>
+            Độ dài video (giây)
+            <input type="number" id="metricLength" min="1" step="0.1" placeholder="45" />
+          </label>
+        </div>
+        <p class="metric-hint">Tool ưu tiên tỷ lệ chia sẻ và tỷ lệ xem hết, không chỉ nhìn lượt xem.</p>
+        <div class="dialog-actions">
+          <button class="ghost-button" value="cancel">Để sau</button>
+          <button class="primary-button" id="saveMetricButton" value="default">Lưu kết quả</button>
+        </div>
+      </form>
+    </dialog>
+    <script src="app.js"></script>
+  </body>
+</html>

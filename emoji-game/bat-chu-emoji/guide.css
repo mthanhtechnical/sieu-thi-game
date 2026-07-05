@@ -1,0 +1,136 @@
+.guide-button {
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  color: #ffd166;
+  background: rgba(255,255,255,.06);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.guide-button:hover {
+  border-color: rgba(255,209,102,.55);
+  background: rgba(255,209,102,.12);
+}
+
+.guide-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  place-items: center;
+  padding: 18px;
+  background: rgba(5,8,14,.72);
+  backdrop-filter: blur(8px);
+}
+
+.guide-modal.open {
+  display: grid;
+}
+
+.guide-panel {
+  width: min(560px, 100%);
+  max-height: min(760px, calc(100vh - 36px));
+  overflow: auto;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 22px;
+  color: #fffaf0;
+  background: #17152b;
+  box-shadow: 0 30px 100px rgba(0,0,0,.34);
+}
+
+.guide-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 22px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.guide-kicker {
+  margin: 0 0 8px;
+  color: #ffd166;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.guide-title {
+  margin: 0;
+  font-size: clamp(26px, 6vw, 38px);
+  line-height: 1.08;
+  letter-spacing: -.04em;
+}
+
+.guide-close {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 50%;
+  color: white;
+  background: transparent;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.guide-body {
+  padding: 20px 22px 24px;
+}
+
+.guide-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.guide-list li {
+  padding: 14px 15px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 15px;
+  background: rgba(255,255,255,.045);
+  color: rgba(255,255,255,.82);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.guide-list strong {
+  display: block;
+  margin-bottom: 4px;
+  color: white;
+  font-size: 16px;
+}
+
+.guide-tip {
+  margin: 16px 0 0;
+  padding: 14px 15px;
+  border-radius: 15px;
+  color: #17152b;
+  background: #ffd166;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.55;
+}
+
+@media (max-width: 560px) {
+  .guide-button {
+    min-width: 38px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .guide-head,
+  .guide-body {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}

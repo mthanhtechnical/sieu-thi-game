@@ -1,0 +1,1 @@
+:root{--bg:#2d2418;--panel:#3d3020;--panel2:#5b462b;--text:#fffaf0;--muted:#cabd9f;--gold:#ffd166;--pink:#ffb36b;--mint:#a8ef8a;--line:rgba(255,255,255,.12)}.letter-tile.extra{border-color:rgba(255,255,255,.18)}@media(max-width:560px){.letter-tile.extra{border-color:rgba(255,255,255,.18)}.letter-tile{width:36px;height:40px;font-size:18px}}

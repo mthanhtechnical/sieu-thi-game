@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#172238" />
+    <meta name="description" content="Tìm điểm khác nhau — quan sát hai bức tranh và bấm vào các chi tiết bị thay đổi." />
+    <title>Tìm điểm khác nhau</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../doan-thanh-ngu/styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../guide.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <a class="brand" href="../"><span>🕵️</span><strong>Tìm điểm khác nhau</strong></a>
+        <div class="header-actions">
+          <button class="icon-button" id="shareGameButton" aria-label="Chia sẻ game">↗</button>
+          <div class="best-score">Kỷ lục <strong id="bestScore">0</strong></div>
+        </div>
+      </header>
+
+      <main>
+        <section class="screen welcome active" id="welcomeScreen">
+          <div class="hero-icons"><span>🌳</span><span>🔍</span><span>🏠</span></div>
+          <p class="eyebrow">Quan sát · 6 điểm mỗi màn</p>
+          <h1>Tìm chi tiết khác nhau.</h1>
+          <p class="intro">So sánh hai ảnh thật và bấm vào các điểm khác ở hình bên phải. Mỗi màn có 6 điểm.</p>
+          <button class="primary-button" id="startButton">Bắt đầu tìm <span>→</span></button>
+          <button class="secondary-button" id="welcomeShareButton">Chia sẻ game <span>↗</span></button>
+        </section>
+
+        <section class="screen game" id="gameScreen">
+          <div class="game-head">
+            <span id="levelText">Màn 1/5</span>
+            <span>Điểm <strong id="scoreText">0</strong></span>
+          </div>
+          <div class="progress"><i id="progressBar"></i></div>
+          <div class="status-row">
+            <strong id="foundText">0/6 đã tìm</strong>
+            <button class="hint-button" id="hintButton" type="button">Gợi ý <span id="hintText">3/ngày</span></button>
+            <span id="mistakeText">Sai 0</span>
+          </div>
+          <div class="scene-pair">
+            <article class="scene-card">
+              <span>Ảnh gốc</span>
+              <div class="scene-wrap" id="leftScene"></div>
+            </article>
+            <article class="scene-card target-card">
+              <span>Bấm vào ảnh này</span>
+              <div class="scene-wrap target-scene" id="rightScene"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="screen feedback" id="feedbackScreen">
+          <div class="feedback-icon" id="feedbackIcon">✨</div>
+          <p class="eyebrow" id="feedbackLabel">Hoàn thành màn</p>
+          <h2 id="feedbackTitle">Mắt tinh đấy!</h2>
+          <p id="feedbackText">Bạn đã tìm đủ 6 điểm khác nhau.</p>
+          <button class="primary-button" id="nextButton">Màn tiếp theo <span>→</span></button>
+        </section>
+
+        <section class="screen result" id="resultScreen">
+          <div class="result-icon">🏆</div>
+          <p class="eyebrow">Hoàn thành</p>
+          <h2 id="resultTitle">Quan sát rất tốt!</h2>
+          <div class="score-panel">
+            <span>Tổng điểm</span>
+            <strong id="finalScore">0</strong>
+            <small id="finalLine">0 điểm khác nhau</small>
+          </div>
+          <button class="primary-button" id="shareResultButton">Thách bạn bè <span>↗</span></button>
+          <button class="secondary-button" id="replayButton">Chơi lại bộ khác</button>
+        </section>
+      </main>
+
+      <footer><a href="../">← Về cổng game</a><span>Game luyện mắt quan sát</span></footer>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="app.js"></script>
+    <script src="../guide.js"></script>
+      <script src="../game-hub-integration.js"></script>
+  </body>
+</html>
