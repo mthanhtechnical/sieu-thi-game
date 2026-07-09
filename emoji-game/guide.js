@@ -452,6 +452,7 @@
   function ensureWelcomeOverlay() {
     const game = getGameInfo();
     if (game.slug === "portal") return;
+    if (document.body?.dataset.skipWelcomeOverlay === "true") return;
     if (document.querySelector(".game-welcome-modal")) return;
     if (sessionStorage.getItem(`ux-welcome-seen:${game.slug}`) === "1") return;
 
