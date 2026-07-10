@@ -25,24 +25,27 @@ const cards = [
   ["healthy","khỏe mạnh","🥗","Fresh food helps us stay healthy.","Thức ăn tươi giúp chúng ta khỏe mạnh."],
   ["remember","ghi nhớ","💡","Remember to turn off the light.","Hãy nhớ tắt đèn."],
 ];
-const state = { deck: [], index: 0, known: 0, review: [], flipped: false };
+const state = { deck: [], index: 0, score: 0, correct: 0, combo: 0, bestCombo: 0, review: [], answered: false };
 const shuffle = (items) => [...items].sort(() => Math.random() - .5);
 function show(id) { document.querySelectorAll(".screen").forEach(el => el.classList.toggle("active", el.id === id)); }
 function best() { $("#bestScore").textContent = Number(localStorage.getItem("flashcards-best") || 0); }
-function start(deck = shuffle(cards).slice(0, 12)) { state.deck = deck; state.index = 0; state.known = 0; state.review = []; show("gameScreen"); render(); }
+function start(deck = shuffle(cards).slice(0, 12)) { state.deck = deck; state.index = 0; state.score = 0; state.correct = 0; state.combo = 0; state.bestCombo = 0; state.review = []; show("gameScreen"); render(); }
 function render() {
   const [word, meaning, emoji, example, exampleVi] = state.deck[state.index];
-  state.flipped = false; $("#flashcard").classList.remove("flipped"); $("#studyActions").classList.remove("visible");
-  $("#roundText").textContent = `Thẻ ${state.index + 1}/${state.deck.length}`; $("#scoreText").textContent = state.known;
+  state.answered = false; $("#flashcard").classList.remove("flipped"); $("#nextButton").classList.remove("visible");
+  $("#roundText").textContent = `Câu ${state.index + 1}/${state.deck.length}`; $("#scoreText").textContent = state.score; $("#comboText").textContent = state.combo;
   $("#progressBar").style.width = `${((state.index + 1) / state.deck.length) * 100}%`;
   $("#cardEmoji").textContent = emoji; $("#cardWord").textContent = word; $("#cardWord").dataset.speak = word; $("#cardBackWord").textContent = `${word} 🔊`; $("#cardBackWord").dataset.speak = word;
   $("#cardMeaning").textContent = meaning; $("#cardExample").textContent = example; $("#cardExampleVi").textContent = exampleVi;
-  $("#flipHint").textContent = "Hãy đoán nghĩa trước khi lật thẻ."; $("#flashcard").setAttribute("aria-label", `${word}. Lật thẻ để xem nghĩa`);
+  $("#flipHint").textContent = "Từ này có nghĩa là gì?"; $("#flashcard").setAttribute("aria-label", `${word}. Hãy chọn nghĩa đúng`);
+  const wrong = shuffle(cards.filter(card => card[1] !== meaning)).slice(0, 3).map(card => card[1]);
+  $("#meaningGrid").innerHTML = shuffle([meaning, ...wrong]).map(item => `<button class="meaning-button" data-meaning="${item}">${item}</button>`).join("");
+  document.querySelectorAll(".meaning-button").forEach(button => button.onclick = () => answer(button, meaning));
 }
-function flip() { state.flipped = !state.flipped; $("#flashcard").classList.toggle("flipped", state.flipped); $("#studyActions").classList.toggle("visible", state.flipped); $("#flipHint").textContent = state.flipped ? "Bạn đã nhớ từ này chưa?" : "Hãy đoán nghĩa trước khi lật thẻ."; }
-function rate(known) { if (known) state.known++; else state.review.push(state.deck[state.index]); state.index++; state.index >= state.deck.length ? finish() : render(); }
-function finish() { const old = Number(localStorage.getItem("flashcards-best") || 0); if (state.known > old) localStorage.setItem("flashcards-best", state.known); best(); $("#finalScore").textContent = state.known; $("#finalLine").textContent = `${state.known}/${state.deck.length} từ`; $("#resultTitle").textContent = state.known >= state.deck.length - 2 ? "Vocabulary rất chắc!" : "Mỗi lần ôn là một lần nhớ hơn!"; $("#reviewButton").hidden = !state.review.length; if (typeof recordGameScore === "function") recordGameScore("Flashcards Từ Vựng", state.known * 100, "📖"); show("resultScreen"); }
+function answer(button, meaning) { if (state.answered) return; state.answered = true; const ok = button.dataset.meaning === meaning; document.querySelectorAll(".meaning-button").forEach(item => { item.disabled = true; if (item.dataset.meaning === meaning) item.classList.add("correct"); }); if (ok) { state.correct++; state.combo++; state.bestCombo = Math.max(state.bestCombo, state.combo); state.score += 100 + (state.combo - 1) * 25; } else { button.classList.add("wrong"); state.combo = 0; state.review.push(state.deck[state.index]); } $("#scoreText").textContent = state.score; $("#comboText").textContent = state.combo; $("#flipHint").textContent = ok ? "✅ Chính xác! Xem ví dụ để nhớ lâu hơn." : `📘 Đáp án đúng: ${meaning}`; $("#flashcard").classList.add("flipped"); $("#nextButton").classList.add("visible"); }
+function next() { state.index++; state.index >= state.deck.length ? finish() : render(); }
+function finish() { const old = Number(localStorage.getItem("flashcards-best") || 0); if (state.score > old) localStorage.setItem("flashcards-best", state.score); best(); $("#finalScore").textContent = state.score; $("#finalLine").textContent = `${state.correct}/${state.deck.length} câu đúng · Combo cao nhất ${state.bestCombo}`; $("#resultTitle").textContent = state.correct >= state.deck.length - 2 ? "Vocabulary rất chắc!" : "Chơi thêm một lượt để nhớ sâu hơn!"; $("#reviewButton").hidden = !state.review.length; if (typeof recordGameScore === "function") recordGameScore("Flashcards Từ Vựng", state.score, "📖"); show("resultScreen"); }
 async function share() { const text = "Cùng học từ vựng tiếng Anh bằng Flashcards!"; if (navigator.share) { try { await navigator.share({ title: "Flashcards Từ Vựng", text, url: location.href }); return; } catch (error) { if (error.name === "AbortError") return; } } await navigator.clipboard.writeText(`${text} ${location.href}`); }
 $("#startButton").onclick = () => start(); $("#replayButton").onclick = () => start(); $("#reviewButton").onclick = () => start(shuffle(state.review));
-$("#flashcard").onclick = flip; $("#knowButton").onclick = () => rate(true); $("#againButton").onclick = () => rate(false);
+$("#nextButton").onclick = next;
 $("#shareGameButton").onclick = share; $("#welcomeShareButton").onclick = share; best();

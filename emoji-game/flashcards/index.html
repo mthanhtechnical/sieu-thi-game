@@ -17,43 +17,41 @@
     <div class="app">
       <header>
         <a class="brand" href="../"><span>📖</span><strong>Flashcards</strong></a>
-        <div class="header-actions"><button class="icon-button" id="shareGameButton" aria-label="Chia sẻ game">↗</button><div class="best-score">Đã nhớ <strong id="bestScore">0</strong></div></div>
+        <div class="header-actions"><button class="icon-button" id="shareGameButton" aria-label="Chia sẻ game">↗</button><div class="best-score">Kỷ lục <strong id="bestScore">0</strong></div></div>
       </header>
       <main>
         <section class="screen welcome active" id="welcomeScreen">
           <div class="hero-icons"><span>📚</span><span>📖</span><span>🔊</span></div>
           <p class="eyebrow">Vocabulary · Flashcards</p>
           <h1>Flashcards Từ Vựng</h1>
-          <p class="intro">Lật thẻ để học nghĩa, phát âm và ví dụ của từ.</p>
-          <button class="primary-button" id="startButton">Học Flashcards <span>→</span></button>
+          <p class="intro">Chọn đúng nghĩa, giữ combo rồi lật thẻ để học phát âm và ví dụ.</p>
+          <button class="primary-button" id="startButton">Chơi Flashcards <span>→</span></button>
           <button class="secondary-button" id="welcomeShareButton">Chia sẻ bộ thẻ <span>↗</span></button>
         </section>
         <section class="screen game" id="gameScreen">
-          <div class="game-head"><span id="roundText">Thẻ 1/12</span><span>Đã nhớ <strong id="scoreText">0</strong></span></div>
+          <div class="game-head"><span id="roundText">Câu 1/12</span><span>Điểm <strong id="scoreText">0</strong> · Combo <strong id="comboText">0</strong></span></div>
           <div class="progress"><i id="progressBar"></i></div>
-          <button class="flashcard" id="flashcard" aria-label="Lật thẻ để xem nghĩa">
+          <div class="flashcard" id="flashcard" role="group" aria-label="Thẻ từ vựng">
             <span class="card-face card-front">
               <span class="card-label">English</span><span class="card-emoji" id="cardEmoji">🌱</span>
               <strong class="card-word" id="cardWord" data-speak="grow">GROW</strong>
-              <small>Chạm để lật thẻ</small>
+              <small>Chọn nghĩa đúng bên dưới</small>
             </span>
             <span class="card-face card-back">
               <span class="card-label">Nghĩa & ví dụ</span><strong class="card-back-word" id="cardBackWord" data-speak="grow">GROW 🔊</strong><strong class="card-meaning" id="cardMeaning">phát triển</strong>
               <p id="cardExample">Plants grow toward the light.</p><span class="exampleVi" id="cardExampleVi">Cây phát triển về phía ánh sáng.</span>
               <span class="listen-hint">Chạm vào từ để nghe lại</span>
             </span>
-          </button>
-          <p class="flip-hint" id="flipHint">Hãy đoán nghĩa trước khi lật thẻ.</p>
-          <div class="study-actions" id="studyActions">
-            <button class="secondary-button" id="againButton">↻ Học lại</button>
-            <button class="primary-button" id="knowButton">✓ Đã nhớ</button>
           </div>
+          <p class="flip-hint" id="flipHint">Từ này có nghĩa là gì?</p>
+          <div class="meaning-grid" id="meaningGrid"></div>
+          <button class="primary-button next-button" id="nextButton">Câu tiếp theo <span>→</span></button>
         </section>
         <section class="screen result" id="resultScreen">
           <div class="result-icon">🎓</div><p class="eyebrow">Hoàn thành bộ thẻ</p><h2 id="resultTitle">Học tốt lắm!</h2>
-          <div class="score-panel"><span>Số từ đã nhớ</span><strong id="finalScore">0</strong><small id="finalLine">0/12 từ</small></div>
-          <button class="primary-button" id="replayButton">Học bộ thẻ khác <span>→</span></button>
-          <button class="secondary-button" id="reviewButton">Ôn lại từ chưa nhớ</button>
+          <div class="score-panel"><span>Tổng điểm</span><strong id="finalScore">0</strong><small id="finalLine">0/12 câu đúng</small></div>
+          <button class="primary-button" id="replayButton">Chơi bộ thẻ khác <span>→</span></button>
+          <button class="secondary-button" id="reviewButton">Chơi lại từ trả lời sai</button>
         </section>
       </main>
       <footer><a href="../">← Về cổng game</a><span>Vocabulary mỗi ngày</span></footer>
