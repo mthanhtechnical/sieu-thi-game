@@ -96,7 +96,7 @@
         ["Nhìn mặt trước", "Đọc từ tiếng Anh và thử nhớ nghĩa trước khi lật thẻ."],
         ["Chọn nghĩa đúng", "Mỗi từ có 4 lựa chọn. Trả lời đúng liên tiếp để tăng combo và điểm."],
         ["Nghe phát âm", "Rê chuột hoặc chạm vào từ tiếng Anh để nghe cách đọc."],
-        ["Ôn từ trả lời sai", "Cuối lượt, chơi lại riêng các từ chưa trả lời đúng."],
+        ["Ôn từ trả lời sai", "Game lưu các từ sai và ưu tiên đưa chúng vào đầu những lượt sau."],
       ],
       tip: "Mẹo: hãy đọc to câu ví dụ và tự đặt thêm một câu mới với từ vừa học.",
     },
