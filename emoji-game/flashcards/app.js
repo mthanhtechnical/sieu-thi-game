@@ -1,29 +1,29 @@
 const $ = (selector) => document.querySelector(selector);
 const cards = [
-  ["grow","phát triển","🌱","Plants grow toward the light.","Cây phát triển về phía ánh sáng."],
-  ["brave","dũng cảm","🦁","She was brave enough to speak up.","Cô ấy đủ dũng cảm để lên tiếng."],
-  ["journey","hành trình","🧳","Every journey begins with one step.","Mỗi hành trình bắt đầu bằng một bước chân."],
-  ["discover","khám phá ra","🔭","We discover something new every day.","Mỗi ngày chúng ta khám phá một điều mới."],
-  ["improve","cải thiện","📈","Practice will improve your English.","Luyện tập sẽ cải thiện tiếng Anh của bạn."],
-  ["protect","bảo vệ","🛡️","Trees help protect the environment.","Cây xanh giúp bảo vệ môi trường."],
-  ["balance","sự cân bằng","⚖️","Balance work with time to rest.","Hãy cân bằng công việc với thời gian nghỉ."],
-  ["curious","tò mò","🤔","Curious children ask many questions.","Trẻ tò mò đặt nhiều câu hỏi."],
-  ["effort","nỗ lực","💪","Your effort will bring good results.","Nỗ lực của bạn sẽ mang lại kết quả tốt."],
-  ["friendly","thân thiện","😊","Our new neighbor is very friendly.","Người hàng xóm mới rất thân thiện."],
-  ["knowledge","kiến thức","📚","Reading gives us knowledge.","Đọc sách mang lại kiến thức cho chúng ta."],
-  ["memory","trí nhớ","🧠","This song brings back a happy memory.","Bài hát này gợi lại một ký ức vui."],
-  ["patient","kiên nhẫn","⏳","Be patient when learning a new skill.","Hãy kiên nhẫn khi học kỹ năng mới."],
-  ["prepare","chuẩn bị","🎒","I prepare my bag before school.","Tôi chuẩn bị cặp trước khi đi học."],
-  ["respect","tôn trọng","🤝","We should respect different opinions.","Chúng ta nên tôn trọng những ý kiến khác nhau."],
-  ["support","hỗ trợ","🙌","Good friends support each other.","Bạn tốt luôn hỗ trợ lẫn nhau."],
-  ["challenge","thử thách","🎯","This puzzle is a fun challenge.","Câu đố này là một thử thách thú vị."],
-  ["confident","tự tin","✨","She feels confident before the test.","Cô ấy cảm thấy tự tin trước bài kiểm tra."],
-  ["creative","sáng tạo","🎨","He found a creative solution.","Cậu ấy tìm ra một giải pháp sáng tạo."],
-  ["environment","môi trường","🌍","We all share the same environment.","Tất cả chúng ta cùng chia sẻ một môi trường."],
-  ["focus","tập trung","🎯","Focus on one task at a time.","Hãy tập trung vào từng việc một."],
-  ["grateful","biết ơn","💛","I am grateful for your help.","Tôi biết ơn sự giúp đỡ của bạn."],
-  ["healthy","khỏe mạnh","🥗","Fresh food helps us stay healthy.","Thức ăn tươi giúp chúng ta khỏe mạnh."],
-  ["remember","ghi nhớ","💡","Remember to turn off the light.","Hãy nhớ tắt đèn."],
+  ["grow","phát triển","🌱","Plants grow toward the light.","Cây phát triển về phía ánh sáng.","/ɡroʊ/"],
+  ["brave","dũng cảm","🦁","She was brave enough to speak up.","Cô ấy đủ dũng cảm để lên tiếng.","/breɪv/"],
+  ["journey","hành trình","🧳","Every journey begins with one step.","Mỗi hành trình bắt đầu bằng một bước chân.","/ˈdʒɝːni/"],
+  ["discover","khám phá ra","🔭","We discover something new every day.","Mỗi ngày chúng ta khám phá một điều mới.","/dɪˈskʌvər/"],
+  ["improve","cải thiện","📈","Practice will improve your English.","Luyện tập sẽ cải thiện tiếng Anh của bạn.","/ɪmˈpruːv/"],
+  ["protect","bảo vệ","🛡️","Trees help protect the environment.","Cây xanh giúp bảo vệ môi trường.","/prəˈtekt/"],
+  ["balance","sự cân bằng","⚖️","Balance work with time to rest.","Hãy cân bằng công việc với thời gian nghỉ.","/ˈbæləns/"],
+  ["curious","tò mò","🤔","Curious children ask many questions.","Trẻ tò mò đặt nhiều câu hỏi.","/ˈkjʊriəs/"],
+  ["effort","nỗ lực","💪","Your effort will bring good results.","Nỗ lực của bạn sẽ mang lại kết quả tốt.","/ˈefərt/"],
+  ["friendly","thân thiện","😊","Our new neighbor is very friendly.","Người hàng xóm mới rất thân thiện.","/ˈfrendli/"],
+  ["knowledge","kiến thức","📚","Reading gives us knowledge.","Đọc sách mang lại kiến thức cho chúng ta.","/ˈnɑːlɪdʒ/"],
+  ["memory","trí nhớ","🧠","This song brings back a happy memory.","Bài hát này gợi lại một ký ức vui.","/ˈmeməri/"],
+  ["patient","kiên nhẫn","⏳","Be patient when learning a new skill.","Hãy kiên nhẫn khi học kỹ năng mới.","/ˈpeɪʃənt/"],
+  ["prepare","chuẩn bị","🎒","I prepare my bag before school.","Tôi chuẩn bị cặp trước khi đi học.","/prɪˈper/"],
+  ["respect","tôn trọng","🤝","We should respect different opinions.","Chúng ta nên tôn trọng những ý kiến khác nhau.","/rɪˈspekt/"],
+  ["support","hỗ trợ","🙌","Good friends support each other.","Bạn tốt luôn hỗ trợ lẫn nhau.","/səˈpɔːrt/"],
+  ["challenge","thử thách","🎯","This puzzle is a fun challenge.","Câu đố này là một thử thách thú vị.","/ˈtʃælɪndʒ/"],
+  ["confident","tự tin","✨","She feels confident before the test.","Cô ấy cảm thấy tự tin trước bài kiểm tra.","/ˈkɑːnfɪdənt/"],
+  ["creative","sáng tạo","🎨","He found a creative solution.","Cậu ấy tìm ra một giải pháp sáng tạo.","/kriˈeɪtɪv/"],
+  ["environment","môi trường","🌍","We all share the same environment.","Tất cả chúng ta cùng chia sẻ một môi trường.","/ɪnˈvaɪrənmənt/"],
+  ["focus","tập trung","🎯","Focus on one task at a time.","Hãy tập trung vào từng việc một.","/ˈfoʊkəs/"],
+  ["grateful","biết ơn","💛","I am grateful for your help.","Tôi biết ơn sự giúp đỡ của bạn.","/ˈɡreɪtfəl/"],
+  ["healthy","khỏe mạnh","🥗","Fresh food helps us stay healthy.","Thức ăn tươi giúp chúng ta khỏe mạnh.","/ˈhelθi/"],
+  ["remember","ghi nhớ","💡","Remember to turn off the light.","Hãy nhớ tắt đèn.","/rɪˈmembər/"],
 ];
 const state = { deck: [], index: 0, score: 0, correct: 0, combo: 0, bestCombo: 0, review: [], answered: false };
 const shuffle = (items) => [...items].sort(() => Math.random() - .5);
@@ -31,11 +31,11 @@ function show(id) { document.querySelectorAll(".screen").forEach(el => el.classL
 function best() { $("#bestScore").textContent = Number(localStorage.getItem("flashcards-best") || 0); }
 function start(deck = shuffle(cards).slice(0, 12)) { state.deck = deck; state.index = 0; state.score = 0; state.correct = 0; state.combo = 0; state.bestCombo = 0; state.review = []; show("gameScreen"); render(); }
 function render() {
-  const [word, meaning, , example, exampleVi] = state.deck[state.index];
+  const [word, meaning, , example, exampleVi, phonetic] = state.deck[state.index];
   state.answered = false; $("#flashcard").classList.remove("flipped"); $("#nextButton").classList.remove("visible");
   $("#roundText").textContent = `Câu ${state.index + 1}/${state.deck.length}`; $("#scoreText").textContent = state.score; $("#comboText").textContent = state.combo;
   $("#progressBar").style.width = `${((state.index + 1) / state.deck.length) * 100}%`;
-  $("#cardWord").textContent = word; $("#cardWord").dataset.speak = word; $("#cardBackWord").textContent = `${word} 🔊`; $("#cardBackWord").dataset.speak = word;
+  $("#cardWord").textContent = word; $("#cardWord").dataset.speak = word; $("#cardPhonetic").textContent = phonetic; $("#cardBackWord").textContent = `${word} 🔊`; $("#cardBackWord").dataset.speak = word; $("#cardBackPhonetic").textContent = phonetic;
   $("#cardMeaning").textContent = meaning; $("#cardExample").textContent = example; $("#cardExampleVi").textContent = exampleVi;
   $("#flipHint").textContent = "Từ này có nghĩa là gì?"; $("#flashcard").setAttribute("aria-label", `${word}. Hãy chọn nghĩa đúng`);
   const wrong = shuffle(cards.filter(card => card[1] !== meaning)).slice(0, 3).map(card => card[1]);
