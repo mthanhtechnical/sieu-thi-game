@@ -31,11 +31,11 @@ function show(id) { document.querySelectorAll(".screen").forEach(el => el.classL
 function best() { $("#bestScore").textContent = Number(localStorage.getItem("flashcards-best") || 0); }
 function start(deck = shuffle(cards).slice(0, 12)) { state.deck = deck; state.index = 0; state.score = 0; state.correct = 0; state.combo = 0; state.bestCombo = 0; state.review = []; show("gameScreen"); render(); }
 function render() {
-  const [word, meaning, emoji, example, exampleVi] = state.deck[state.index];
+  const [word, meaning, , example, exampleVi] = state.deck[state.index];
   state.answered = false; $("#flashcard").classList.remove("flipped"); $("#nextButton").classList.remove("visible");
   $("#roundText").textContent = `Câu ${state.index + 1}/${state.deck.length}`; $("#scoreText").textContent = state.score; $("#comboText").textContent = state.combo;
   $("#progressBar").style.width = `${((state.index + 1) / state.deck.length) * 100}%`;
-  $("#cardEmoji").textContent = emoji; $("#cardWord").textContent = word; $("#cardWord").dataset.speak = word; $("#cardBackWord").textContent = `${word} 🔊`; $("#cardBackWord").dataset.speak = word;
+  $("#cardWord").textContent = word; $("#cardWord").dataset.speak = word; $("#cardBackWord").textContent = `${word} 🔊`; $("#cardBackWord").dataset.speak = word;
   $("#cardMeaning").textContent = meaning; $("#cardExample").textContent = example; $("#cardExampleVi").textContent = exampleVi;
   $("#flipHint").textContent = "Từ này có nghĩa là gì?"; $("#flashcard").setAttribute("aria-label", `${word}. Hãy chọn nghĩa đúng`);
   const wrong = shuffle(cards.filter(card => card[1] !== meaning)).slice(0, 3).map(card => card[1]);
