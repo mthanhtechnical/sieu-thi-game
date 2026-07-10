@@ -90,6 +90,16 @@
       ],
       tip: "Mẹo: chú ý các từ gần giống như remember/remind hoặc cooperate/compete.",
     },
+    flashcards: {
+      title: "Flashcards Từ Vựng",
+      steps: [
+        ["Nhìn mặt trước", "Đọc từ tiếng Anh và thử nhớ nghĩa trước khi lật thẻ."],
+        ["Lật thẻ", "Chạm vào thẻ để xem nghĩa tiếng Việt cùng câu ví dụ."],
+        ["Nghe phát âm", "Rê chuột hoặc chạm vào từ tiếng Anh để nghe cách đọc."],
+        ["Tự đánh giá", "Chọn Đã nhớ hoặc Học lại để tạo bộ ôn tập phù hợp."],
+      ],
+      tip: "Mẹo: hãy đọc to câu ví dụ và tự đặt thêm một câu mới với từ vừa học.",
+    },
     "quiz-theo-chu-de": {
       title: "Quiz Theo Chủ Đề",
       steps: [
@@ -268,6 +278,7 @@
       kids: "Vui học Emoji 5+",
       "kids-english": "English 5+",
       "doan-tu-tieng-anh": "Đoán từ tiếng Anh",
+      flashcards: "Flashcards Từ Vựng",
       wordle: "Wordle",
       hangman: "Hangman",
       unscramble: "Unscramble",
@@ -291,6 +302,7 @@
       kids: "Một bộ trò chơi nhẹ nhàng cho bé học qua hình ảnh và màu sắc.",
       "kids-english": "Nghe, nhìn và chọn từ tiếng Anh đúng với hình ảnh.",
       "doan-tu-tieng-anh": "Chọn đáp án đúng để mở rộng vốn từ tiếng Anh.",
+      flashcards: "Lật thẻ để học nghĩa, phát âm và ví dụ của từ tiếng Anh.",
       wordle: "Đoán từ tiếng Anh 5 chữ cái trong vài lượt thử.",
       hangman: "Đoán từng chữ cái để lật mở đáp án đúng.",
       unscramble: "Sắp xếp lại chữ cái thành từ tiếng Anh đúng.",
