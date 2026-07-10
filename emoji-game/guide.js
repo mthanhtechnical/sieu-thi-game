@@ -93,6 +93,7 @@
     flashcards: {
       title: "Flashcards Từ Vựng",
       steps: [
+        ["Kho 1.000 từ", "Mỗi lượt ưu tiên từ chưa xuất hiện và tránh lặp cho đến khi bạn đi gần hết kho."],
         ["Nhìn mặt trước", "Đọc từ tiếng Anh và thử nhớ nghĩa trước khi lật thẻ."],
         ["Chọn nghĩa đúng", "Mỗi từ có 4 lựa chọn. Trả lời đúng liên tiếp để tăng combo và điểm."],
         ["Nghe phát âm", "Rê chuột hoặc chạm vào từ tiếng Anh để nghe cách đọc."],

@@ -155,6 +155,7 @@ function buildSupplementalQuestions(){const nouns=nounSeeds.flatMap(({emoji,a,vi
 let questions=uniqueByAnswer([...coreQuestions,...buildSupplementalQuestions()]).slice(0,1000);
 const answerWords=questions.map(q=>q.a);
 questions=questions.map(q=>q.c?q:{...q,c:buildChoices(q.a,answerWords)});
+window.GAME_VOCABULARY_1000=questions.map(({a,vi,emoji,ex})=>({word:a,meaning:vi,emoji,example:ex}));
 
 const state={deck:[],i:0,score:0,correct:0,streak:0};
 const RECENT_KEY="doan-tu-tieng-anh-recent";

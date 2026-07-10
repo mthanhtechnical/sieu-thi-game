@@ -46,18 +46,20 @@ const extraVocabulary = [
   ["special","đặc biệt","/ˈspeʃəl/"],["success","thành công","/səkˈses/"],["surprise","sự ngạc nhiên","/sərˈpraɪz/"],["together","cùng nhau","/təˈɡeðər/"],
   ["understand","hiểu","/ˌʌndərˈstænd/"],["useful","hữu ích","/ˈjuːsfəl/"],["wonderful","tuyệt vời","/ˈwʌndərfəl/"],["worry","lo lắng","/ˈwɜːri/"],
 ];
-const cards = [...coreCards, ...extraVocabulary.map(([word, meaning, phonetic]) => [word, meaning, "", `I learned the word “${word}” today.`, `Hôm nay tôi học từ “${word}”.`, phonetic])];
+let cards = [...coreCards, ...extraVocabulary.map(([word, meaning, phonetic]) => [word, meaning, "", `I learned the word “${word}” today.`, `Hôm nay tôi học từ “${word}”.`, phonetic])];
 const RECENT_KEY = "flashcards-recent-words";
 const WRONG_KEY = "flashcards-wrong-words";
 const state = { deck: [], index: 0, score: 0, correct: 0, combo: 0, bestCombo: 0, review: [], answered: false };
 const shuffle = (items) => [...items].sort(() => Math.random() - .5);
+function loadFullVocabulary() { return new Promise(resolve => { const frame = document.createElement("iframe"); frame.hidden = true; frame.setAttribute("aria-hidden", "true"); const done = () => { $("#startButton").disabled = false; $("#startButton").innerHTML = "Chơi Flashcards <span>→</span>"; frame.remove(); resolve(); }; frame.onload = () => { const bank = frame.contentWindow?.GAME_VOCABULARY_1000 || []; const phonetics = new Map(cards.map(card => [card[0], card[5]])); const curated = new Map(cards.map(card => [card[0], card])); const expanded = bank.map(item => curated.get(item.word) || [item.word, item.meaning, "", item.example || `I learned the word “${item.word}” today.`, item.meaning, phonetics.get(item.word) || "Nhấn vào từ để nghe phát âm"]); cards = [...new Map([...cards, ...expanded].map(card => [card[0], card])).values()].slice(0, 1000); done(); }; frame.onerror = done; frame.src = "../doan-tu-tieng-anh/"; document.body.appendChild(frame); setTimeout(() => { if (frame.isConnected) done(); }, 8000); }); }
+const vocabularyReady = loadFullVocabulary();
 function loadWords(key) { try { return JSON.parse(localStorage.getItem(key) || "[]"); } catch { return []; } }
 function saveWords(key, words) { localStorage.setItem(key, JSON.stringify([...new Set(words)])); }
 function cardByWord(word) { return cards.find(card => card[0] === word); }
 function buildDeck() { const wrong = loadWords(WRONG_KEY).map(cardByWord).filter(Boolean); const recent = new Set(loadWords(RECENT_KEY)); const unseen = shuffle(cards.filter(card => !recent.has(card[0]) && !wrong.some(item => item[0] === card[0]))); const fallback = shuffle(cards.filter(card => !wrong.some(item => item[0] === card[0]))); const deck = [...shuffle(wrong), ...unseen, ...fallback].filter((card, index, list) => list.findIndex(item => item[0] === card[0]) === index).slice(0, 12); saveWords(RECENT_KEY, [...deck.map(card => card[0]), ...loadWords(RECENT_KEY)].slice(0, Math.max(0, cards.length - 12))); return deck; }
 function show(id) { document.querySelectorAll(".screen").forEach(el => el.classList.toggle("active", el.id === id)); }
 function best() { $("#bestScore").textContent = Number(localStorage.getItem("flashcards-best") || 0); }
-function start(deck = buildDeck()) { state.deck = deck; state.index = 0; state.score = 0; state.correct = 0; state.combo = 0; state.bestCombo = 0; state.review = []; show("gameScreen"); render(); }
+async function start(deck = null) { await vocabularyReady; state.deck = deck || buildDeck(); state.index = 0; state.score = 0; state.correct = 0; state.combo = 0; state.bestCombo = 0; state.review = []; show("gameScreen"); render(); }
 function render() {
   const [word, meaning, , example, exampleVi, phonetic] = state.deck[state.index];
   state.answered = false; $("#flashcard").classList.remove("flipped"); $("#nextButton").classList.remove("visible");
