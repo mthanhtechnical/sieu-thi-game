@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#172d46" />
+    <meta name="description" content="Flashcards Từ Vựng — lật thẻ để học nghĩa, phát âm và ví dụ tiếng Anh." />
+    <title>Flashcards Từ Vựng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../doan-thanh-ngu/styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../guide.css" />
+  </head>
+  <body data-skip-welcome-overlay="true">
+    <div class="app">
+      <header>
+        <a class="brand" href="../"><span>📖</span><strong>Flashcards</strong></a>
+        <div class="header-actions"><button class="icon-button" id="shareGameButton" aria-label="Chia sẻ game">↗</button><div class="best-score">Đã nhớ <strong id="bestScore">0</strong></div></div>
+      </header>
+      <main>
+        <section class="screen welcome active" id="welcomeScreen">
+          <div class="hero-icons"><span>📚</span><span>📖</span><span>🔊</span></div>
+          <p class="eyebrow">Vocabulary · Flashcards</p>
+          <h1>Flashcards Từ Vựng</h1>
+          <p class="intro">Lật thẻ để học nghĩa, phát âm và ví dụ của từ.</p>
+          <button class="primary-button" id="startButton">Học Flashcards <span>→</span></button>
+          <button class="secondary-button" id="welcomeShareButton">Chia sẻ bộ thẻ <span>↗</span></button>
+        </section>
+        <section class="screen game" id="gameScreen">
+          <div class="game-head"><span id="roundText">Thẻ 1/12</span><span>Đã nhớ <strong id="scoreText">0</strong></span></div>
+          <div class="progress"><i id="progressBar"></i></div>
+          <button class="flashcard" id="flashcard" aria-label="Lật thẻ để xem nghĩa">
+            <span class="card-face card-front">
+              <span class="card-label">English</span><span class="card-emoji" id="cardEmoji">🌱</span>
+              <strong class="card-word" id="cardWord" data-speak="grow">GROW</strong>
+              <small>Chạm để lật thẻ</small>
+            </span>
+            <span class="card-face card-back">
+              <span class="card-label">Nghĩa & ví dụ</span><strong class="card-back-word" id="cardBackWord" data-speak="grow">GROW 🔊</strong><strong class="card-meaning" id="cardMeaning">phát triển</strong>
+              <p id="cardExample">Plants grow toward the light.</p><span class="exampleVi" id="cardExampleVi">Cây phát triển về phía ánh sáng.</span>
+              <span class="listen-hint">Chạm vào từ để nghe lại</span>
+            </span>
+          </button>
+          <p class="flip-hint" id="flipHint">Hãy đoán nghĩa trước khi lật thẻ.</p>
+          <div class="study-actions" id="studyActions">
+            <button class="secondary-button" id="againButton">↻ Học lại</button>
+            <button class="primary-button" id="knowButton">✓ Đã nhớ</button>
+          </div>
+        </section>
+        <section class="screen result" id="resultScreen">
+          <div class="result-icon">🎓</div><p class="eyebrow">Hoàn thành bộ thẻ</p><h2 id="resultTitle">Học tốt lắm!</h2>
+          <div class="score-panel"><span>Số từ đã nhớ</span><strong id="finalScore">0</strong><small id="finalLine">0/12 từ</small></div>
+          <button class="primary-button" id="replayButton">Học bộ thẻ khác <span>→</span></button>
+          <button class="secondary-button" id="reviewButton">Ôn lại từ chưa nhớ</button>
+        </section>
+      </main>
+      <footer><a href="../">← Về cổng game</a><span>Vocabulary mỗi ngày</span></footer>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="../english-speech.js"></script>
+    <script src="app.js"></script>
+    <script src="../guide.js"></script>
+    <script src="../game-hub-integration.js"></script>
+  </body>
+</html>

@@ -177,7 +177,7 @@ function makeUtterance(text, lang = "vi-VN") {
   return utterance;
 }
 function speak(text, lang = "vi-VN", shouldCancel = true) {
-  if (!("speechSynthesis" in window)) return;
+  if (!soundEnabled || !("speechSynthesis" in window)) return;
   if (!voices.length) loadVoices();
   if (shouldCancel) speechSynthesis.cancel();
   speechSynthesis.speak(makeUtterance(text, lang));
@@ -396,7 +396,11 @@ $("#soundButton").addEventListener("click", () => {
 $("#shareButton").addEventListener("click", share);
 $("#answerGrid").addEventListener("click", (event) => {
   const button = event.target.closest(".answer-button");
-  if (button) chooseAnswer(button.dataset.answer);
+  if (button) { speakWord(button.dataset.answer); chooseAnswer(button.dataset.answer); }
+});
+$("#answerGrid").addEventListener("pointerover", (event) => {
+  const button = event.target.closest(".answer-button");
+  if (button && !button.contains(event.relatedTarget)) speakWord(button.dataset.answer);
 });
 
 if ("speechSynthesis" in window) {

@@ -358,7 +358,7 @@ function makeUtterance(text, lang = "vi-VN") {
   return utterance;
 }
 function speak(text, lang = "vi-VN", shouldCancel = true) {
-  if (!("speechSynthesis" in window)) return;
+  if (!soundEnabled || !("speechSynthesis" in window)) return;
   if (!voices.length) loadVoices();
   if (shouldCancel) speechSynthesis.cancel();
   speechSynthesis.speak(makeUtterance(text, lang));
@@ -881,7 +881,14 @@ $("#soundButton").addEventListener("click", () => {
 $("#shareButton").addEventListener("click", share);
 $("#answerGrid").addEventListener("click", (event) => {
   const button = event.target.closest(".answer-button");
-  if (button) chooseAnswer(button.dataset.answer, button);
+  if (button) {
+    if (state.deck[state.index]?.[0] === "Tiếng Anh vui") speak(button.dataset.answer, "en-US");
+    chooseAnswer(button.dataset.answer, button);
+  }
+});
+$("#answerGrid").addEventListener("pointerover", (event) => {
+  const button = event.target.closest(".answer-button");
+  if (button && !button.contains(event.relatedTarget) && state.deck[state.index]?.[0] === "Tiếng Anh vui") speak(button.dataset.answer, "en-US");
 });
 
 if ("speechSynthesis" in window) {
