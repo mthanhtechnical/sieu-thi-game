@@ -517,19 +517,13 @@
     const toolbar = document.createElement("div");
     toolbar.className = "ux-toolbar";
 
-    const homeLink = document.createElement("a");
-    homeLink.className = "toolbar-link";
-    homeLink.href = getHomeHref();
-    homeLink.setAttribute("aria-label", "Quay về cổng game");
-    homeLink.innerHTML = "<span aria-hidden=\"true\">←</span> Cổng game";
-
     const button = document.createElement("button");
     button.className = "guide-button";
     button.type = "button";
     button.dataset.guideOpen = "true";
     button.textContent = "Hướng dẫn";
 
-    toolbar.append(homeLink, button);
+    toolbar.append(button);
 
     if (target.matches("header")) {
       target.appendChild(toolbar);
