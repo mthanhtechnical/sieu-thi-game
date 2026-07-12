@@ -530,7 +530,12 @@
     if (target.matches("header")) {
       target.appendChild(toolbar);
     } else {
-      target.prepend(toolbar);
+      const mobileNavButton = target.querySelector(".mobile-nav-button");
+      if (mobileNavButton) {
+        target.insertBefore(toolbar, mobileNavButton);
+      } else {
+        target.prepend(toolbar);
+      }
     }
 
     const modal = buildModal(guide);
