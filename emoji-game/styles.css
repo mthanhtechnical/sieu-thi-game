@@ -521,8 +521,8 @@ body[data-game-theme="quiz-theo-chu-de"] { --accent: #60e6a8; --accent-strong: #
   header { height: auto; min-height: 68px; justify-content: flex-end; padding: 10px 0; }
   .header-actions { width: 100%; justify-content: flex-start; gap: 8px; }
   .header-actions .hub-menu-button { order: 1; margin-right: auto; }
-  .header-actions .ux-toolbar { order: 2; flex: 0 0 auto; }
-  .header-actions .mobile-nav-button { order: 3; }
+  .header-actions .mobile-nav-button { order: 2; }
+  .header-actions .ux-toolbar { order: 3; flex: 0 0 auto; }
   .guide-button { min-height: 42px; padding: 0 14px; }
   .game-stage { width: 100%; }
   .screen { padding: 16px 0 24px; }
