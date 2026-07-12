@@ -454,8 +454,9 @@ body[data-game-theme="quiz-theo-chu-de"] { --accent: #60e6a8; --accent-strong: #
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    width: 42px;
     min-height: 42px;
-    padding: 0 14px;
+    padding: 0;
     border: 1px solid rgba(255,255,255,.14);
     border-radius: 999px;
     color: var(--text);
