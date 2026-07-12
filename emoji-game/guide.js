@@ -441,6 +441,8 @@
     if (existingBar) existingBar.remove();
 
     const game = getGameInfo();
+    if (game.slug === "portal") return;
+
     const bestScore = getBestScoreForGame(game.slug);
     const playCount = getPlayCountForGame(game.slug);
     const lastScore = localStorage.getItem(`ux-last-score:${game.slug}`) || "—";

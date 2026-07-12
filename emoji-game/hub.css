@@ -496,8 +496,23 @@
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 768px) {
+  .hub-menu-button {
+    min-height: 42px;
+    padding: 8px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .hub-menu {
+    gap: 16px;
+    padding: 18px 0 4px;
+  }
+
+  .hub-menu-head h2 { font-size: 24px; }
+
   .player-dashboard {
-    padding: 20px;
+    padding: 16px;
+    margin-bottom: 0;
   }
 
   .dashboard-header {

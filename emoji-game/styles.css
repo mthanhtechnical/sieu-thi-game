@@ -459,8 +459,8 @@ body[data-game-theme="quiz-theo-chu-de"] { --accent: #60e6a8; --accent-strong: #
 }
 
 @media (max-width: 640px) {
-  .app-shell { padding: 0 16px; }
-  .logo strong { font-size: 16px; }
+  .app-shell,
+  .portal-shell { padding: 0 12px 28px; }
   .portal-section {
     width: calc(100% - 32px);
     padding: 54px 0;
@@ -486,8 +486,10 @@ body[data-game-theme="quiz-theo-chu-de"] { --accent: #60e6a8; --accent-strong: #
     border-radius: 15px;
     font-size: 24px;
   }
-  header { flex-wrap: wrap; gap: 12px; }
-  .logo { width: 100%; justify-content: space-between; }
+  header { height: auto; min-height: 68px; justify-content: flex-end; padding: 10px 0; }
+  .header-actions { width: 100%; justify-content: space-between; gap: 8px; }
+  .ux-toolbar { flex: 0 0 auto; }
+  .guide-button { min-height: 42px; padding: 0 14px; }
   .game-stage { width: 100%; }
   .screen { padding: 16px 0 24px; }
   .hero-emoji { gap: 6px; }
