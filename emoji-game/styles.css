@@ -37,6 +37,7 @@ button { font: inherit; }
 .app-shell,
 .portal-shell { width: min(1120px, 100%); min-height: 100vh; margin: 0 auto; padding: 0 22px 36px; display: flex; flex-direction: column; gap: 16px; }
 header {
+  position: relative;
   height: 76px;
   display: flex;
   align-items: center;
@@ -52,6 +53,7 @@ header {
 .site-nav a { color: var(--muted); text-decoration: none; font-size: 15px; font-weight: 800; }
 .site-nav a:hover { color: var(--accent); }
 .header-actions { display: flex; align-items: center; gap: 8px; }
+.mobile-nav-button { display: none; }
 .sound-button,
 .share-icon-button {
   display: grid;
@@ -448,7 +450,36 @@ body[data-game-theme="quiz-theo-chu-de"] { --accent: #60e6a8; --accent-strong: #
 }
 
 @media (max-width: 900px) {
-  .site-nav { display: none; }
+  .mobile-nav-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 14px;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 999px;
+    color: var(--text);
+    background: rgba(255,255,255,.06);
+    cursor: pointer;
+    font-weight: 800;
+  }
+  .mobile-nav-button.active { color: #221b12; background: var(--accent); }
+  .site-nav {
+    position: absolute;
+    z-index: 50;
+    top: calc(100% + 8px);
+    right: 0;
+    display: none;
+    width: min(280px, calc(100vw - 24px));
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: rgba(29,24,57,.98);
+    box-shadow: var(--shadow);
+  }
+  .site-nav.open { display: grid; }
+  .site-nav a { padding: 12px 14px; border-radius: 10px; }
+  .site-nav a:hover { background: rgba(255,255,255,.07); }
   .game-grid,
   .answer-list {
     grid-template-columns: 1fr 1fr;
@@ -487,7 +518,7 @@ body[data-game-theme="quiz-theo-chu-de"] { --accent: #60e6a8; --accent-strong: #
     font-size: 24px;
   }
   header { height: auto; min-height: 68px; justify-content: flex-end; padding: 10px 0; }
-  .header-actions { width: 100%; justify-content: space-between; gap: 8px; }
+  .header-actions { width: 100%; justify-content: flex-end; gap: 8px; }
   .ux-toolbar { flex: 0 0 auto; }
   .guide-button { min-height: 42px; padding: 0 14px; }
   .game-stage { width: 100%; }
