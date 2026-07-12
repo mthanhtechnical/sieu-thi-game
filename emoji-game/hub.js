@@ -229,6 +229,20 @@ class GameHub {
   }
 
   setupEventListeners() {
+    const menu = document.querySelector('#hubMenu');
+    const menuButton = document.querySelector('.hub-menu-button');
+    const menuClose = document.querySelector('.hub-menu-close');
+    const setMenuOpen = (open) => {
+      if (!menu || !menuButton) return;
+      menu.hidden = !open;
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.classList.toggle('active', open);
+      if (open) menu.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    if (menuButton) menuButton.onclick = () => setMenuOpen(menu.hidden);
+    if (menuClose) menuClose.onclick = () => setMenuOpen(false);
+
     const editBtn = document.querySelector('.edit-profile-btn');
     const resetBtn = document.querySelector('.reset-stats-btn');
 

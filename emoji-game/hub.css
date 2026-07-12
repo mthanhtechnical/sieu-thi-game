@@ -1,5 +1,52 @@
 /* ===== HUB DASHBOARD STYLES ===== */
 
+.hub-menu-button {
+  border: 1px solid rgba(255, 214, 77, 0.35);
+  border-radius: 999px;
+  padding: 11px 16px;
+  background: rgba(255, 214, 77, 0.1);
+  color: var(--accent);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.hub-menu-button:hover,
+.hub-menu-button.active {
+  background: var(--accent);
+  color: #221b12;
+}
+
+.hub-menu[hidden] { display: none; }
+
+.hub-menu {
+  display: grid;
+  gap: 24px;
+  padding: 28px 20px 8px;
+  scroll-margin-top: 90px;
+}
+
+.hub-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hub-menu-head h2 { margin: 0; }
+
+.hub-menu-close {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-size: 26px;
+  cursor: pointer;
+}
+
 .player-dashboard {
   background: linear-gradient(135deg, rgba(255,107,157,.1) 0%, rgba(96,230,168,.05) 100%);
   border: 1px solid rgba(255,255,255,.1);

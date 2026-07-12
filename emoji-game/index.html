@@ -33,10 +33,20 @@
           <a href="#blog">Blog</a>
           <a href="#faq">FAQ</a>
         </nav>
-        <div class="header-actions"></div>
+        <div class="header-actions">
+          <button class="hub-menu-button" type="button" aria-expanded="false" aria-controls="hubMenu">
+            🏆 Hồ sơ & xếp hạng
+          </button>
+        </div>
       </header>
 
       <main>
+        <div class="hub-menu" id="hubMenu" hidden>
+          <div class="hub-menu-head">
+            <h2>Hồ sơ người chơi</h2>
+            <button class="hub-menu-close" type="button" aria-label="Đóng hồ sơ">×</button>
+          </div>
+
         <!-- PLAYER DASHBOARD -->
         <section class="player-dashboard">
           <div class="dashboard-header">
@@ -121,6 +131,8 @@
             </button>
           </div>
         </section>
+
+        </div>
 
         <section class="portal-hero" id="games">
           <div class="section-head">
