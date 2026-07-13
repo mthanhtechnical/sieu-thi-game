@@ -164,6 +164,19 @@
   background: rgba(255,209,102,.18);
 }
 
+/* Keep each game's main call-to-action visually consistent. */
+.primary-button.shared-action-button {
+  border-color: #ffd166;
+  color: #24162f;
+  background: #ffd166;
+  box-shadow: 0 14px 36px rgba(255,209,102,.2);
+}
+
+.primary-button.shared-action-button:hover {
+  border-color: #ffdc85;
+  background: #ffdc85;
+}
+
 .game-welcome-modal {
   position: fixed;
   inset: 0;
