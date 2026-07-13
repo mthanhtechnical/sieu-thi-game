@@ -554,7 +554,6 @@
     applyGameTheme();
     normalizeActionButtons();
     hookScoreRecording(getGameInfo().slug);
-    ensureWelcomeOverlay();
     renderSharedSummary();
   }
 
