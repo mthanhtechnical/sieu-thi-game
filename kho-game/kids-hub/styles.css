@@ -1,0 +1,12 @@
+:root{--bg:#2b1b58;--panel:#3b2872;--panel2:#5940a0;--text:#fffdf8;--muted:#d2c9e8;--gold:#ffd75e;--pink:#ff86b7;--mint:#87efc1;--line:rgba(255,255,255,.13)}
+body{background:radial-gradient(circle at 15% 0,rgba(255,134,183,.28),transparent 32%),radial-gradient(circle at 90% 20%,rgba(135,239,193,.2),transparent 30%),linear-gradient(180deg,#2b1b58,#201944)}
+.app{width:min(100%,920px)}
+.brand span{background:linear-gradient(145deg,#ff8fbd,#7657df)}
+.welcome{padding-top:10px}
+.intro{max-width:680px}
+.hub-grid{grid-template-columns:repeat(3,1fr)}
+.hub-card{position:relative;background:rgba(59,40,114,.82);box-shadow:0 18px 45px rgba(20,11,45,.2)}
+.hub-card.featured{border-color:rgba(255,215,94,.55);background:linear-gradient(145deg,rgba(89,64,160,.96),rgba(59,40,114,.86))}
+.hub-card em{display:inline-flex;margin-top:12px;padding:5px 9px;border-radius:999px;color:#291b52;background:var(--gold);font-size:11px;font-style:normal;font-weight:800}
+.parent-note{margin:24px 0 0;padding:14px 18px;border:1px solid var(--line);border-radius:16px;color:var(--muted);background:rgba(255,255,255,.05);font-size:14px;line-height:1.6}
+@media(max-width:700px){.hub-grid{grid-template-columns:1fr}.hero-icons span{width:72px;height:72px}.hero-icons span:nth-child(2){width:88px;height:88px}.welcome h1{font-size:clamp(38px,12vw,56px)}}

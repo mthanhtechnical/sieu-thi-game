@@ -1,0 +1,44 @@
+/* Shared baseline for every game in English Hub. */
+:where(button, a, input, [role="button"]):focus-visible {
+  outline: 3px solid #8ad7ff;
+  outline-offset: 3px;
+}
+
+:where(button, .primary-button, .secondary-button, .icon-button) {
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: .58;
+}
+
+.screen[hidden] {
+  display: none !important;
+}
+
+.toast[role="status"] {
+  pointer-events: none;
+}
+
+@media (max-width: 520px) {
+  .game-head {
+    gap: 8px 14px;
+    flex-wrap: wrap;
+  }
+
+  .header-actions {
+    flex-shrink: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

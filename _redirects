@@ -1,0 +1,3 @@
+/emoji-game /kho-game/ 301
+/emoji-game/ /kho-game/ 301
+/emoji-game/* /kho-game/:splat 301

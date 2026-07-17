@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#112b26" />
+    <meta name="description" content="Đoán Từ Tiếng Anh — nhìn gợi ý tiếng Việt và emoji để chọn đúng từ tiếng Anh." />
+    <title>Đoán Từ Tiếng Anh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../doan-thanh-ngu/styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../guide.css?v=20260713-primary-button" /><link rel="stylesheet" href="../english-phase1.css?v=20260714">
+  </head>
+  <body data-skip-welcome-overlay="true">
+    <div class="app">
+      <header>
+        <a class="brand" href="../english-hub/"><span>🇬🇧</span><strong>Đoán Từ Tiếng Anh</strong></a>
+        <div class="header-actions"><button class="icon-button" id="shareGameButton" aria-label="Chia sẻ game">↗</button><div class="best-score">Kỷ lục <strong id="bestScore">0</strong></div></div>
+      </header>
+      <main>
+        <section class="screen welcome active" id="welcomeScreen">
+          <div class="hero-icons"><span>🧠</span><span>🔤</span><span>⚡</span></div>
+          <p class="eyebrow">Từ vựng · Nghĩa Việt · Phản xạ</p>
+          <h1>Nhìn gợi ý, chọn đúng từ tiếng Anh.</h1>
+          <p class="intro">Mỗi lượt 10 từ. Có nghĩa tiếng Việt, emoji gợi ý và giải thích sau khi trả lời.</p>
+          <button class="primary-button" id="startButton">Chơi ngay <span>→</span></button>
+          <button class="secondary-button" id="welcomeShareButton">Chia sẻ game <span>↗</span></button>
+        </section>
+        <section class="screen game" id="gameScreen">
+          <div class="game-head"><span id="roundText">Câu 1/10</span><span>Điểm <strong id="scoreText">0</strong></span></div>
+          <div class="progress"><i id="progressBar"></i></div>
+          <article class="question-card">
+            <p class="eyebrow" id="categoryText">Vocabulary</p>
+            <div class="word-clue" id="wordClue">🌱</div>
+            <h2 id="questionText">Từ nào có nghĩa là “phát triển”?</h2>
+            <p id="hintText"></p>
+          </article>
+          <div class="answer-grid" id="answerGrid"></div>
+        </section>
+        <section class="screen feedback" id="feedbackScreen"><div class="feedback-icon" id="feedbackIcon">✨</div><p class="eyebrow" id="feedbackLabel">Correct</p><h2 id="feedbackTitle">Grow</h2><p id="feedbackText"></p><button class="primary-button" id="nextButton">Tiếp tục <span>→</span></button></section>
+        <section class="screen result" id="resultScreen"><div class="result-icon">🏆</div><p class="eyebrow">Hoàn thành</p><h2 id="resultTitle">Vocabulary lên cấp!</h2><div class="score-panel"><span>Tổng điểm</span><strong id="finalScore">0</strong><small id="finalCorrect">0/10 câu đúng</small></div><button class="primary-button" id="shareResultButton">Thách bạn bè <span>↗</span></button><button class="secondary-button" id="replayButton">Chơi lại bộ khác</button></section>
+      </main>
+      <footer><a href="../english-hub/">← Về English Hub</a><span>Luyện từ vựng nhanh</span></footer>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="../english-speech.js"></script><script src="app.js"></script>
+    <script src="../guide.js?v=20260713-no-welcome-overlay"></script>
+    <script src="../game-hub-integration.js"></script>
+  </body>
+</html>
