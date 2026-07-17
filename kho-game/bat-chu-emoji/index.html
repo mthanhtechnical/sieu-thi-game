@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#17152b" />
+    <meta
+      name="description"
+      content="Bắt Chữ Emoji — đoán cụm từ tiếng Việt qua emoji trong 10 giây."
+    />
+    <title>Bắt Chữ Emoji</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="guide.css?v=20260713-primary-button" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header>
+        <a class="logo" href="../">
+          <span>😵‍💫</span>
+          <strong>Bắt Chữ Emoji</strong>
+        </a>
+        <div class="header-actions">
+          <button class="share-icon-button" id="quickShareButton" aria-label="Chia sẻ game">
+            ↗
+          </button>
+          <button class="sound-button" id="soundButton" aria-label="Tắt âm thanh" aria-pressed="true">
+            <span id="soundIcon">♫</span>
+          </button>
+          <div class="best-score">Kỷ lục <strong id="bestScore">0</strong></div>
+        </div>
+      </header>
+
+      <main class="game-stage" id="play">
+        <section class="screen welcome-screen active" id="welcomeScreen">
+          <div class="hero-emoji">
+            <span>🧠</span><span>⚡</span><span>🇻🇳</span>
+          </div>
+          <p class="eyebrow">10 câu · 10 giây mỗi câu</p>
+          <h1>Nhìn emoji.<br />Đoán tiếng Việt.</h1>
+          <p class="intro">
+            Trông dễ đấy. Nhưng hiếm ai đúng trọn 10 câu ngay lượt đầu.
+          </p>
+          <div class="mode-card">
+            <div>
+              <span>Thử thách hôm nay</span>
+              <strong>10 câu ngẫu nhiên</strong>
+            </div>
+            <span class="mode-icon">🔥</span>
+          </div>
+          <button class="primary-button" id="startButton">
+            Chơi ngay <span>→</span>
+          </button>
+          <button class="secondary-button welcome-share-button" id="welcomeShareButton">
+            Chia sẻ game <span>↗</span>
+          </button>
+          <p class="tiny-note">Không cần đăng nhập · Chơi miễn phí</p>
+          <a class="kids-link" href="../kids/"><span>🌈</span> Phiên bản vui học cho bé</a>
+        </section>
+
+        <section class="screen game-screen" id="gameScreen">
+          <div class="game-top">
+            <span id="questionCount">Câu 1/10</span>
+            <span>Điểm <strong id="score">0</strong></span>
+          </div>
+          <div class="progress"><i id="progressBar"></i></div>
+
+          <div class="timer-wrap">
+            <svg class="timer" viewBox="0 0 100 100" aria-label="Thời gian còn lại">
+              <circle class="timer-bg" cx="50" cy="50" r="44"></circle>
+              <circle class="timer-ring" id="timerRing" cx="50" cy="50" r="44"></circle>
+            </svg>
+            <strong id="timerText">10</strong>
+          </div>
+
+          <div class="puzzle-card">
+            <div class="emoji-puzzle" id="emojiPuzzle">☀️ 🐓</div>
+            <p id="hint">Gợi ý: Một thời điểm trong ngày</p>
+          </div>
+
+          <div class="answer-grid" id="answerGrid"></div>
+          <button class="skip-button" id="skipButton">Bỏ qua câu này</button>
+        </section>
+
+        <section class="screen feedback-screen" id="feedbackScreen">
+          <div class="feedback-icon" id="feedbackIcon">🎉</div>
+          <p class="eyebrow" id="feedbackEyebrow">Chính xác</p>
+          <h2 id="feedbackTitle">Gà gáy</h2>
+          <p id="feedbackNote">Bạn vừa kiếm được 100 điểm.</p>
+          <button class="primary-button" id="nextButton">Câu tiếp theo <span>→</span></button>
+        </section>
+
+        <section class="screen result-screen" id="resultScreen">
+          <div class="result-burst">
+            <span>✨</span><span>🏆</span><span>✨</span>
+          </div>
+          <p class="eyebrow">Hoàn thành thử thách</p>
+          <h2 id="resultHeadline">Não bạn chạy nhanh đấy!</h2>
+          <div class="score-circle">
+            <span>Điểm của bạn</span>
+            <strong id="finalScore">0</strong>
+            <small id="correctCount">0/10 câu đúng</small>
+          </div>
+          <div class="result-stats">
+            <div><span>Đúng liên tiếp</span><strong id="bestStreak">0</strong></div>
+            <div><span>Xếp hạng</span><strong id="rank">Tân binh</strong></div>
+          </div>
+          <button class="primary-button share-button" id="shareButton">
+            Thách bạn bè <span>↗</span>
+          </button>
+          <button class="secondary-button" id="replayButton">Chơi lại bộ câu khác</button>
+        </section>
+      </main>
+
+      <footer>
+        <a href="../">← Về cổng game</a>
+        <span>Đoán tiếng Việt qua emoji</span>
+      </footer>
+    </div>
+
+    <section class="portal-section game-catalog" id="games">
+      <div class="section-head">
+        <p class="eyebrow">Cổng game giải đố</p>
+        <h2>Chọn game nhanh, chơi ngay trên trình duyệt.</h2>
+        <p>
+          Các game được thiết kế cho lượt chơi ngắn, dễ chia sẻ và đủ thử thách để bạn muốn quay lại mỗi ngày.
+        </p>
+      </div>
+      <div class="game-grid">
+        <article class="game-card featured-game">
+          <div class="game-art">😵‍💫</div>
+          <div>
+            <span class="tag">Đang nổi bật</span>
+            <h3>Bắt Chữ Emoji</h3>
+            <p>Nhìn chuỗi emoji, đoán cụm từ tiếng Việt trong 10 giây. Có điểm, kỷ lục và thử thách bạn bè.</p>
+            <a class="card-link" href="#play">Chơi Bắt Chữ Emoji</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">🌈</div>
+          <div>
+            <span class="tag">Cho bé</span>
+            <h3>Vui Học Emoji 5+</h3>
+            <p>Suy luận, toán nhỏ, tiếng Anh và thói quen tốt với sticker vui cho bạn nhỏ chơi cùng ba mẹ.</p>
+            <a class="card-link" href="./kids/">Mở phiên bản cho bé</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">🧩</div>
+          <div>
+            <span class="tag">Mới</span>
+            <h3>Ghép Ý Từ Hình</h3>
+            <p>Gợi ý bằng hình ảnh, chọn từ khóa đúng và mở chuỗi câu hỏi theo chủ đề trí nhớ.</p>
+            <a class="card-link" href="./ghep-y-tu-hinh/">Chơi Ghép Ý Từ Hình</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">📜</div>
+          <div>
+            <span class="tag">Tiếng Việt</span>
+            <h3>Đoán Thành Ngữ</h3>
+            <p>Đọc gợi ý nghĩa bóng, chọn đúng thành ngữ hoặc tục ngữ Việt Nam.</p>
+            <a class="card-link" href="./doan-thanh-ngu/">Chơi Đoán Thành Ngữ</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">🖼️</div>
+          <div>
+            <span class="tag">Bắt chữ</span>
+            <h3>Đoán Hình Bắt Chữ</h3>
+            <p>Nhìn cụm hình gợi âm và nghĩa, suy luận để chọn đúng cụm từ.</p>
+            <a class="card-link" href="./doan-hinh-bat-chu/">Chơi Đoán Hình Bắt Chữ</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">🇬🇧</div>
+          <div>
+            <span class="tag">Vocabulary</span>
+            <h3>Đoán Từ Tiếng Anh</h3>
+            <p>Nhìn nghĩa tiếng Việt và emoji gợi ý, chọn đúng từ tiếng Anh.</p>
+            <a class="card-link" href="./doan-tu-tieng-anh/">Chơi Đoán Từ Tiếng Anh</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">❓</div>
+          <div>
+            <span class="tag">Quiz</span>
+            <h3>Quiz theo chủ đề</h3>
+            <p>Chọn chủ đề yêu thích rồi trả lời nhanh các câu hỏi kiến thức vui.</p>
+            <a class="card-link" href="./quiz-theo-chu-de/">Chơi Quiz theo chủ đề</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">🔎</div>
+          <div>
+            <span class="tag">Word game</span>
+            <h3>Word Search</h3>
+            <p>Tìm các từ tiếng Anh ẩn trong lưới chữ theo hàng ngang, dọc hoặc chéo.</p>
+            <a class="card-link" href="./word-search/">Chơi Word Search</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">✍️</div>
+          <div>
+            <span class="tag">Đoán chữ</span>
+            <h3>Hangman</h3>
+            <p>Đọc gợi ý và đoán từng chữ cái trước khi hết lượt sai.</p>
+            <a class="card-link" href="./hangman/">Chơi Hangman</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">🔠</div>
+          <div>
+            <span class="tag">Wordle</span>
+            <h3>Wordle</h3>
+            <p>Đoán từ tiếng Anh 5 chữ cái trong 6 lượt với gợi ý màu.</p>
+            <a class="card-link" href="./wordle/">Chơi Wordle</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">🔀</div>
+          <div>
+            <span class="tag">Xếp chữ</span>
+            <h3>Unscramble</h3>
+            <p>Sắp xếp chữ cái lộn xộn thành từ tiếng Anh đúng theo gợi ý.</p>
+            <a class="card-link" href="./unscramble/">Chơi Unscramble</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">📝</div>
+          <div>
+            <span class="tag">Điền chữ</span>
+            <h3>Điền chữ còn thiếu</h3>
+            <p>Nhìn từ bị khuyết và nghĩa tiếng Việt, chọn phần chữ còn thiếu.</p>
+            <a class="card-link" href="./dien-chu-con-thieu/">Chơi Điền chữ còn thiếu</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">🔗</div>
+          <div>
+            <span class="tag">Liên tưởng</span>
+            <h3>Nối từ</h3>
+            <p>Ghép các cặp từ liên quan ở hai cột để hoàn thành bảng.</p>
+            <a class="card-link" href="./noi-tu/">Chơi Nối từ</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">🔤</div>
+          <div>
+            <span class="tag">Ghép chữ</span>
+            <h3>Ghép chữ thành từ</h3>
+            <p>Chọn chữ cái đúng từ ngân hàng có chữ nhiễu để dựng thành từ.</p>
+            <a class="card-link" href="./ghep-chu-thanh-tu/">Chơi Ghép chữ thành từ</a>
+          </div>
+        </article>
+        <article class="game-card">
+          <div class="game-art">🔢</div>
+          <div>
+            <span class="tag">Logic</span>
+            <h3>Sudoku</h3>
+            <p>Điền số 1 đến 9 vào lưới 9x9 sao cho hàng, cột và ô 3x3 không trùng.</p>
+            <a class="card-link" href="./sudoku/">Chơi Sudoku</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="portal-section content-layout" id="guide">
+      <div class="section-head compact">
+        <p class="eyebrow">Hướng dẫn chơi</p>
+        <h2>Cách chơi Bắt Chữ Emoji.</h2>
+      </div>
+      <div class="info-grid">
+        <article>
+          <strong>1. Nhìn emoji</strong>
+          <p>Mỗi câu có một cụm emoji và một dòng gợi ý ngắn để khoanh vùng ý nghĩa.</p>
+        </article>
+        <article>
+          <strong>2. Chọn đáp án</strong>
+          <p>Bạn có 4 lựa chọn. Chọn đúng càng nhanh thì điểm thưởng thời gian càng cao.</p>
+        </article>
+        <article>
+          <strong>3. Giữ chuỗi đúng</strong>
+          <p>Trả lời đúng liên tiếp để nhận thêm điểm streak và tăng cơ hội phá kỷ lục.</p>
+        </article>
+        <article>
+          <strong>4. Chia sẻ kết quả</strong>
+          <p>Kết thúc 10 câu, bạn có thể gửi điểm số để thách bạn bè vượt qua.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="portal-section answer-section" id="answers">
+      <div class="section-head compact">
+        <p class="eyebrow">Đáp án</p>
+        <h2>Gợi ý đáp án thường gặp.</h2>
+        <p>Phần này giúp người chơi ôn lại kiểu tư duy của game mà không làm mất vui toàn bộ bộ câu hỏi.</p>
+      </div>
+      <div class="answer-list">
+        <div><span>☀️ 🐓</span><strong>Gà gáy</strong><small>Gợi ý thời điểm buổi sáng.</small></div>
+        <div><span>🌧️ 🐟</span><strong>Mưa cá</strong><small>Đọc theo hình và liên tưởng cụm từ.</small></div>
+        <div><span>💰 🐷</span><strong>Heo đất</strong><small>Một đồ vật quen thuộc để tiết kiệm.</small></div>
+        <div><span>🔥 🧊</span><strong>Nóng lạnh</strong><small>Hai trạng thái trái ngược đặt cạnh nhau.</small></div>
+      </div>
+    </section>
+
+    <section class="portal-section content-layout" id="tips">
+      <div class="section-head compact">
+        <p class="eyebrow">Mẹo vượt màn</p>
+        <h2>Chơi nhanh hơn mà vẫn tỉnh táo.</h2>
+      </div>
+      <div class="tip-list">
+        <article><strong>Đọc gợi ý trước khi nhìn đáp án.</strong><p>Gợi ý giúp bạn xác định đó là thành ngữ, đồ vật, hành động hay địa điểm.</p></article>
+        <article><strong>Đừng dịch từng emoji quá cứng.</strong><p>Nhiều câu dùng liên tưởng âm thanh, nghĩa bóng hoặc cụm từ quen thuộc trong tiếng Việt.</p></article>
+        <article><strong>Loại đáp án sai trước.</strong><p>Nếu phân vân, hãy loại lựa chọn không khớp chủ đề để tăng tốc quyết định.</p></article>
+        <article><strong>Chơi lại bộ mới.</strong><p>Game ghi nhận câu đã gặp để lượt sau có cảm giác mới hơn khi kho câu còn đủ.</p></article>
+      </div>
+    </section>
+
+    <section class="portal-section game-catalog" id="similar">
+      <div class="section-head compact">
+        <p class="eyebrow">Game tương tự</p>
+        <h2>Dành cho người thích giải đố nhanh.</h2>
+      </div>
+      <div class="mini-game-row">
+        <a href="./kids/">Vui Học Emoji 5+</a>
+        <a href="./ghep-y-tu-hinh/">Ghép Ý Từ Hình</a>
+        <a href="./doan-thanh-ngu/">Đoán Thành Ngữ</a>
+        <a href="./doan-hinh-bat-chu/">Đoán Hình Bắt Chữ</a>
+        <a href="./doan-tu-tieng-anh/">Đoán Từ Tiếng Anh</a>
+        <a href="./quiz-theo-chu-de/">Quiz theo chủ đề</a>
+        <a href="./word-search/">Word Search</a>
+        <a href="./hangman/">Hangman</a>
+        <a href="./wordle/">Wordle</a>
+        <a href="./unscramble/">Unscramble</a>
+        <a href="./dien-chu-con-thieu/">Điền chữ còn thiếu</a>
+        <a href="./noi-tu/">Nối từ</a>
+        <a href="./ghep-chu-thanh-tu/">Ghép chữ thành từ</a>
+        <a href="./sudoku/">Sudoku</a>
+        <a href="#play">Bắt Chữ Emoji</a>
+      </div>
+    </section>
+
+    <section class="portal-section blog-section" id="blog">
+      <div class="section-head compact">
+        <p class="eyebrow">Blog</p>
+        <h2>Bài viết cho người mê game trí não.</h2>
+      </div>
+      <div class="blog-grid">
+        <article>
+          <span>Trí nhớ</span>
+          <h3>10 game giải đố hay để luyện trí nhớ</h3>
+          <p>Danh sách các kiểu game ngắn giúp rèn khả năng quan sát, liên tưởng và phản xạ.</p>
+        </article>
+        <article>
+          <span>Mẹo chơi</span>
+          <h3>Vì sao emoji giúp não liên tưởng nhanh hơn?</h3>
+          <p>Emoji buộc người chơi nối hình ảnh, ngữ cảnh và ngôn ngữ trong vài giây.</p>
+        </article>
+        <article>
+          <span>Gia đình</span>
+          <h3>Cách chọn game vui học an toàn cho trẻ nhỏ</h3>
+          <p>Ưu tiên game không cần tài khoản, không chat mở và có nội dung tích cực.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="portal-section faq-section" id="faq">
+      <div class="section-head compact">
+        <p class="eyebrow">FAQ</p>
+        <h2>Câu hỏi thường gặp.</h2>
+      </div>
+      <details open>
+        <summary>Bắt Chữ Emoji có miễn phí không?</summary>
+        <p>Có. Bạn có thể chơi trực tiếp trên trình duyệt mà không cần đăng nhập.</p>
+      </details>
+      <details>
+        <summary>Điểm kỷ lục được lưu ở đâu?</summary>
+        <p>Kỷ lục được lưu ngay trên thiết bị và trình duyệt bạn đang dùng, không cần tạo tài khoản hay gửi thông tin cá nhân.</p>
+      </details>
+      <details>
+        <summary>Có phiên bản cho trẻ em không?</summary>
+        <p>Có, mục Vui Học Emoji 5+ được thiết kế nhẹ nhàng hơn, có sticker và nội dung học vui.</p>
+      </details>
+    </section>
+
+    <section class="portal-section legal-grid" id="about">
+      <article>
+        <p class="eyebrow">Giới thiệu</p>
+        <h2>Emoji Game là cổng game nhỏ cho các thử thách trí não ngắn.</h2>
+        <p>Mục tiêu là tạo các game dễ vào, dễ hiểu, có màu sắc Việt Nam và phù hợp để chơi nhanh trong vài phút rảnh.</p>
+      </article>
+      <article id="privacy">
+        <p class="eyebrow">Chính sách bảo mật</p>
+        <h2>Dữ liệu tối giản.</h2>
+        <p>Game không yêu cầu đăng nhập. Điểm tốt nhất, âm thanh và câu đã chơi được lưu cục bộ trên thiết bị để cải thiện trải nghiệm.</p>
+      </article>
+      <article id="terms">
+        <p class="eyebrow">Điều khoản sử dụng</p>
+        <h2>Chơi vui, chia sẻ văn minh.</h2>
+        <p>Nội dung được cung cấp cho mục đích giải trí. Không sao chép, khai thác hoặc gây tải bất thường lên website.</p>
+      </article>
+      <article id="contact">
+        <p class="eyebrow">Liên hệ</p>
+        <h2>Gửi góp ý game.</h2>
+        <p>Nếu bạn muốn đề xuất câu hỏi, báo lỗi hoặc hợp tác nội dung, hãy liên hệ qua kênh quản trị website.</p>
+      </article>
+    </section>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="app.js"></script>
+    <script src="guide.js"></script>
+    <script src="../game-hub-integration.js"></script>
+  </body>
+</html>
