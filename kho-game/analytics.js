@@ -1,5 +1,13 @@
 const $ = (selector) => document.querySelector(selector);
 const number = (value) => Number(value || 0).toLocaleString("vi-VN");
+function duration(value) {
+  const seconds = Number(value || 0);
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  if (hours) return `${hours} giờ ${minutes} phút`;
+  if (minutes) return `${minutes} phút`;
+  return `${seconds} giây`;
+}
 
 function renderBars(selector, rows) {
   const element = $(selector);
@@ -52,6 +60,7 @@ async function loadStats() {
     $("#completions").textContent = number(totals.completions);
     $("#completionRate").textContent = `${totals.completionRate}% từ lượt chơi`;
     $("#shares").textContent = number(totals.shares);
+    $("#totalPlayTime").textContent = duration(totals.total_play_seconds);
     $("#averageScore").textContent = number(data.scores.average_score);
     $("#highestScore").textContent = number(data.scores.highest_score);
     $("#averageCorrect").textContent = `${data.scores.average_correct || 0}/10`;
@@ -61,6 +70,9 @@ async function loadStats() {
     renderBars("#sourceList", data.sources);
     renderBars("#deviceList", data.devices);
     renderBars("#countryList", data.countries);
+    $("#gameStats").innerHTML = data.games?.length
+      ? data.games.map(row => `<tr><td>${row.label}</td><td>${number(row.starts)}</td><td>${number(row.completions)}</td><td>${duration(row.duration_seconds)}</td></tr>`).join("")
+      : '<tr><td colspan="4" class="empty">Chưa có dữ liệu.</td></tr>';
   } catch (error) {
     $("#errorMessage").textContent = error.message;
     $("#errorMessage").style.display = "block";

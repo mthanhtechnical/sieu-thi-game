@@ -1,4 +1,4 @@
-const allowedEvents = new Set(["visit", "game_start", "game_complete", "share"]);
+const allowedEvents = new Set(["visit", "game_start", "game_complete", "game_exit", "share"]);
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -24,6 +24,8 @@ export async function onRequestPost({ request, env }) {
     const body = await request.json();
     const eventType = cleanText(body.event, 30);
     const sessionId = cleanText(body.sessionId, 80);
+    const visitorId = cleanText(body.visitorId, 80);
+    const gameSlug = cleanText(body.gameSlug, 80);
 
     if (!allowedEvents.has(eventType) || !sessionId) {
       return json({ ok: false, error: "invalid_event" }, 400);
@@ -32,12 +34,14 @@ export async function onRequestPost({ request, env }) {
     const country = cleanText(request.cf?.country || "unknown", 8);
     const statement = env.ANALYTICS_DB.prepare(`
       INSERT INTO events (
-        event_type, session_id, score, correct_count, duration_seconds,
+        event_type, session_id, visitor_id, game_slug, score, correct_count, duration_seconds,
         source, referrer_host, device_type, country
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).bind(
       eventType,
       sessionId,
+      visitorId || sessionId,
+      gameSlug,
       safeNumber(body.score),
       safeNumber(body.correct, 10),
       safeNumber(body.duration, 86400),
@@ -63,14 +67,16 @@ export async function onRequestGet({ env }) {
       devices,
       countries,
       scoreStats,
+      gameStats,
     ] = await Promise.all([
       env.ANALYTICS_DB.prepare(`
         SELECT
           COUNT(CASE WHEN event_type = 'visit' THEN 1 END) AS visits,
-          COUNT(DISTINCT CASE WHEN event_type = 'visit' THEN session_id END) AS visitors,
+          COUNT(DISTINCT CASE WHEN event_type = 'visit' THEN COALESCE(visitor_id, session_id) END) AS visitors,
           COUNT(CASE WHEN event_type = 'game_start' THEN 1 END) AS starts,
           COUNT(CASE WHEN event_type = 'game_complete' THEN 1 END) AS completions,
-          COUNT(CASE WHEN event_type = 'share' THEN 1 END) AS shares
+          COUNT(CASE WHEN event_type = 'share' THEN 1 END) AS shares,
+          COALESCE(SUM(CASE WHEN event_type IN ('game_complete', 'game_exit') THEN duration_seconds ELSE 0 END), 0) AS total_play_seconds
         FROM events
       `).first(),
       env.ANALYTICS_DB.prepare(`
@@ -117,6 +123,18 @@ export async function onRequestGet({ env }) {
         FROM events
         WHERE event_type = 'game_complete'
       `).first(),
+      env.ANALYTICS_DB.prepare(`
+        SELECT
+          COALESCE(NULLIF(game_slug, ''), 'unknown') AS label,
+          COUNT(CASE WHEN event_type = 'game_start' THEN 1 END) AS starts,
+          COUNT(CASE WHEN event_type = 'game_complete' THEN 1 END) AS completions,
+          COALESCE(SUM(CASE WHEN event_type IN ('game_complete', 'game_exit') THEN duration_seconds ELSE 0 END), 0) AS duration_seconds
+        FROM events
+        WHERE event_type IN ('game_start', 'game_complete', 'game_exit')
+        GROUP BY COALESCE(NULLIF(game_slug, ''), 'unknown')
+        ORDER BY starts DESC, duration_seconds DESC
+        LIMIT 24
+      `).all(),
     ]);
 
     const starts = Number(totals?.starts || 0);
@@ -134,6 +152,7 @@ export async function onRequestGet({ env }) {
       devices: devices.results,
       countries: countries.results,
       scores: scoreStats,
+      games: gameStats.results,
       generatedAt: new Date().toISOString(),
     });
   } catch {

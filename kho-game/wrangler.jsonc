@@ -1,13 +1,13 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "sieu-thi-game",
+  "name": "bat-chu-emoji",
   "pages_build_output_dir": ".",
   "compatibility_date": "2026-06-22",
   "d1_databases": [
     {
       "binding": "ANALYTICS_DB",
-      "database_name": "sieu-thi-game-analytics",
-      "database_id": "3e57b043-d560-450a-90c6-53c6e321dc14"
+      "database_name": "bat-chu-emoji-analytics",
+      "database_id": "984151a7-8e5f-46ff-b3c4-fcfd3bdfea26"
     }
   ]
 }

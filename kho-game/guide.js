@@ -420,12 +420,90 @@
     return current;
   }
 
+  const remoteAnalytics = {
+    slug: "",
+    startedAt: 0,
+  };
+
+  function analyticsId(storage, key) {
+    let value = storage.getItem(key);
+    if (!value) {
+      value = globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      storage.setItem(key, value);
+    }
+    return value;
+  }
+
+  function analyticsDevice() {
+    if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) return "mobile";
+    return "desktop";
+  }
+
+  function analyticsSource() {
+    const params = new URLSearchParams(location.search);
+    if (params.get("utm_source")) return params.get("utm_source");
+    try {
+      return document.referrer ? new URL(document.referrer).hostname : "direct";
+    } catch {
+      return "direct";
+    }
+  }
+
+  function sendAnalytics(event, details = {}) {
+    const payload = {
+      event,
+      visitorId: analyticsId(localStorage, "analytics-visitor-id"),
+      sessionId: analyticsId(sessionStorage, "analytics-session-id"),
+      gameSlug: remoteAnalytics.slug,
+      source: analyticsSource(),
+      referrerHost: (() => {
+        try { return document.referrer ? new URL(document.referrer).hostname : ""; } catch { return ""; }
+      })(),
+      device: analyticsDevice(),
+      ...details,
+    };
+    fetch("/api/events", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    }).catch(() => {});
+  }
+
+  function startRemotePlay() {
+    remoteAnalytics.startedAt = Date.now();
+    sendAnalytics("game_start");
+  }
+
+  function finishRemotePlay(score) {
+    if (!remoteAnalytics.startedAt) return;
+    const duration = Math.max(1, Math.round((Date.now() - remoteAnalytics.startedAt) / 1000));
+    remoteAnalytics.startedAt = 0;
+    sendAnalytics("game_complete", { score, duration });
+  }
+
+  function initRemoteAnalytics(slug) {
+    remoteAnalytics.slug = slug;
+    const visitKey = `analytics-visit:${slug}`;
+    if (!sessionStorage.getItem(visitKey)) {
+      sessionStorage.setItem(visitKey, "1");
+      sendAnalytics("visit");
+    }
+    addEventListener("pagehide", () => {
+      if (!remoteAnalytics.startedAt) return;
+      const duration = Math.max(1, Math.round((Date.now() - remoteAnalytics.startedAt) / 1000));
+      remoteAnalytics.startedAt = 0;
+      sendAnalytics("game_exit", { duration });
+    });
+  }
+
   function hookPlayTracking(slug) {
     document.querySelectorAll("#startButton, #replayButton").forEach((button) => {
       if (button.dataset.uxPlayTracked === "true") return;
       button.dataset.uxPlayTracked = "true";
       button.addEventListener("click", () => {
         trackPlayStart(slug);
+        startRemotePlay();
         setTimeout(renderSharedSummary, 0);
       });
     });
@@ -441,6 +519,7 @@
         localStorage.setItem(bestKey, String(score));
       }
       localStorage.setItem(`ux-last-score:${slug}`, `${score} điểm`);
+      finishRemotePlay(Number(score) || 0);
       if (originalRecord) originalRecord(gameName, score, emoji);
       renderSharedSummary();
     };
@@ -569,6 +648,7 @@
 
     applyGameTheme();
     normalizeActionButtons();
+    initRemoteAnalytics(getGameInfo().slug);
     hookScoreRecording(getGameInfo().slug);
     hookPlayTracking(getGameInfo().slug);
     renderSharedSummary();
