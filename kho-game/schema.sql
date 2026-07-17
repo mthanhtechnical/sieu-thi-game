@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS events (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   event_type TEXT NOT NULL,
+  event_id TEXT,
   session_id TEXT NOT NULL,
   visitor_id TEXT,
   game_slug TEXT,
@@ -19,3 +20,4 @@ CREATE INDEX IF NOT EXISTS idx_events_type_created ON events(event_type, created
 CREATE INDEX IF NOT EXISTS idx_events_session ON events(session_id);
 CREATE INDEX IF NOT EXISTS idx_events_visitor ON events(visitor_id);
 CREATE INDEX IF NOT EXISTS idx_events_game_created ON events(game_slug, created_at);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_events_event_id ON events(event_id) WHERE event_id IS NOT NULL;

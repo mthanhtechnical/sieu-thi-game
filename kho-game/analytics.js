@@ -52,6 +52,7 @@ async function loadStats() {
     const response = await fetch("/api/events", { cache: "no-store" });
     if (!response.ok) throw new Error("Không tải được dữ liệu.");
     const data = await response.json();
+    $("#qualityNotice").hidden = !data.dataQuality?.cleanOnly;
     const totals = data.totals;
     $("#visits").textContent = number(totals.visits);
     $("#visitors").textContent = `${number(totals.visitors)} người dùng`;

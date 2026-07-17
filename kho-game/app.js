@@ -158,6 +158,9 @@ const circumference = 2 * Math.PI * 44;
 const analyticsSessionId =
   sessionStorage.getItem("emoji-analytics-session") || crypto.randomUUID();
 sessionStorage.setItem("emoji-analytics-session", analyticsSessionId);
+const analyticsVisitorId =
+  localStorage.getItem("emoji-analytics-visitor") || crypto.randomUUID();
+localStorage.setItem("emoji-analytics-visitor", analyticsVisitorId);
 let audioContext;
 let musicTimer;
 let musicStep = 0;
@@ -204,7 +207,10 @@ function trackEvent(event, details = {}) {
     headers: { "content-type": "application/json" },
     body: JSON.stringify({
       event,
+      eventId: crypto.randomUUID(),
       sessionId: analyticsSessionId,
+      visitorId: analyticsVisitorId,
+      gameSlug: "bat-chu-emoji",
       source: getTrafficSource(),
       referrerHost,
       device: getDeviceType(),
@@ -453,7 +459,7 @@ async function shareResult() {
 async function shareGame() {
   const text = "Thử chơi Bắt Chữ Emoji: nhìn emoji, đoán cụm từ tiếng Việt trong 10 giây.";
   const data = { title: "Bắt Chữ Emoji", text, url: window.location.origin + window.location.pathname };
-  trackEvent("share_game");
+  trackEvent("share");
   if (navigator.share) {
     try {
       await navigator.share(data);

@@ -452,6 +452,7 @@
   function sendAnalytics(event, details = {}) {
     const payload = {
       event,
+      eventId: globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`,
       visitorId: analyticsId(localStorage, "analytics-visitor-id"),
       sessionId: analyticsId(sessionStorage, "analytics-session-id"),
       gameSlug: remoteAnalytics.slug,

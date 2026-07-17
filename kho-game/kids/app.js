@@ -324,6 +324,8 @@ function createSessionId() {
 }
 const sessionId = sessionStorage.getItem("kids-session") || createSessionId();
 sessionStorage.setItem("kids-session", sessionId);
+const visitorId = localStorage.getItem("kids-visitor") || createSessionId();
+localStorage.setItem("kids-visitor", visitorId);
 let audioContext;
 let musicTimer;
 let musicStep = 0;
@@ -456,7 +458,8 @@ function track(event, details = {}) {
     headers: { "content-type": "application/json" },
     keepalive: true,
     body: JSON.stringify({
-      event, sessionId, source: getSource(),
+      event, eventId: createSessionId(), sessionId, visitorId, gameSlug: "kids",
+      source: getSource(),
       device: innerWidth <= 600 ? "mobile" : innerWidth <= 1024 ? "tablet" : "desktop",
       ...details,
     }),

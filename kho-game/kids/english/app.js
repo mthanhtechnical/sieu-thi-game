@@ -152,6 +152,8 @@ function createSessionId() {
 }
 const sessionId = sessionStorage.getItem("kids-english-session") || createSessionId();
 sessionStorage.setItem("kids-english-session", sessionId);
+const visitorId = localStorage.getItem("kids-english-visitor") || createSessionId();
+localStorage.setItem("kids-english-visitor", visitorId);
 let audioContext;
 let soundEnabled = localStorage.getItem("kids-english-sound") !== "false";
 let voices = [];
@@ -221,7 +223,8 @@ function track(event, details = {}) {
     headers: { "content-type": "application/json" },
     keepalive: true,
     body: JSON.stringify({
-      event, sessionId, source: getSource(),
+      event, eventId: createSessionId(), sessionId, visitorId, gameSlug: "kids-english",
+      source: getSource(),
       device: innerWidth <= 600 ? "mobile" : innerWidth <= 1024 ? "tablet" : "desktop",
       ...details,
     }),
